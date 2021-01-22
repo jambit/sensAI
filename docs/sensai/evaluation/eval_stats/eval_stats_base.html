@@ -1,0 +1,427 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>eval_stats_base &mdash; sensAI 0.0.5.dev0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="eval_stats_classification" href="eval_stats_classification.html" />
+    <link rel="prev" title="eval_stats" href="../eval_stats.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> sensAI
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Guides and Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Clustering%20Evaluation.html">Evaluating clustering algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Intro%20to%20Coordinate%20Clustering.html">The Coordinate Clustering Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Intro%20to%20sensAI.html">Lightning intro to sensAI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Tracking%20Experiments.html">Tracking sensAI experiments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting-started.html">Getting started</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../catboost.html">catboost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../clustering.html">clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../columngen.html">columngen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../data_ingest.html">data_ingest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../data_transformation.html">data_transformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../distance_metric.html">distance_metric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ensemble.html">ensemble</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../evaluation.html">evaluation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../clustering_ground_truth.html">clustering_ground_truth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../crossval.html">crossval</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../eval_stats.html">eval_stats</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">eval_stats_base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eval_stats_classification.html">eval_stats_classification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eval_stats_clustering.html">eval_stats_clustering</a></li>
+<li class="toctree-l4"><a class="reference internal" href="eval_stats_regression.html">eval_stats_regression</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../eval_util.html">eval_util</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../evaluator.html">evaluator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../evaluator_clustering.html">evaluator_clustering</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../featuregen.html">featuregen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../hyperopt.html">hyperopt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../lightgbm.html">lightgbm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../local_search.html">local_search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../naive_bayes.html">naive_bayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../nearest_neighbors.html">nearest_neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../normalisation.html">normalisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../sklearn.html">sklearn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tensorflow.html">tensorflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../torch.html">torch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tracking.html">tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../util.html">util</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vector_model.html">vector_model</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">sensAI</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Modules</a> &raquo;</li>
+        
+          <li><a href="../../evaluation.html">evaluation</a> &raquo;</li>
+        
+          <li><a href="../eval_stats.html">eval_stats</a> &raquo;</li>
+        
+      <li>eval_stats_base</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../../_sources/sensai/evaluation/eval_stats/eval_stats_base.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-sensai.evaluation.eval_stats.eval_stats_base">
+<span id="eval-stats-base"></span><h1>eval_stats_base<a class="headerlink" href="#module-sensai.evaluation.eval_stats.eval_stats_base" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="sensai.evaluation.eval_stats.eval_stats_base.EvalStats">
+<em class="property">class </em><code class="sig-name descname">EvalStats</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwds</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jambit/sensAI/blob/master/src/sensai/evaluation/eval_stats/eval_stats_base.py#L23"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensai.evaluation.eval_stats.eval_stats_base.EvalStats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code></p>
+<dl class="py method">
+<dt id="sensai.evaluation.eval_stats.eval_stats_base.EvalStats.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">metrics</span><span class="p">:</span> <span class="n">List<span class="p">[</span>TMetric<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">additionalMetrics</span><span class="p">:</span> <span class="n">List<span class="p">[</span>TMetric<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.evaluation.eval_stats.eval_stats_base.EvalStats.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sensai.evaluation.eval_stats.eval_stats_base.EvalStats.setName">
+<code class="sig-name descname">setName</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.evaluation.eval_stats.eval_stats_base.EvalStats.setName" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="sensai.evaluation.eval_stats.eval_stats_base.EvalStats.addMetric">
+<code class="sig-name descname">addMetric</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">metric</span><span class="p">:</span> <span class="n">TMetric</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.evaluation.eval_stats.eval_stats_base.EvalStats.addMetric" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="sensai.evaluation.eval_stats.eval_stats_base.EvalStats.computeMetricValue">
+<code class="sig-name descname">computeMetricValue</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">metric</span><span class="p">:</span> <span class="n">TMetric</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#sensai.evaluation.eval_stats.eval_stats_base.EvalStats.computeMetricValue" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="sensai.evaluation.eval_stats.eval_stats_base.EvalStats.getAll">
+<code class="sig-name descname">getAll</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.evaluation.eval_stats.eval_stats_base.EvalStats.getAll" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sensai.evaluation.eval_stats.eval_stats_base.Metric">
+<em class="property">class </em><code class="sig-name descname">Metric</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwds</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jambit/sensAI/blob/master/src/sensai/evaluation/eval_stats/eval_stats_base.py#L59"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensai.evaluation.eval_stats.eval_stats_base.Metric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<dl class="py method">
+<dt id="sensai.evaluation.eval_stats.eval_stats_base.Metric.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n">str</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.evaluation.eval_stats.eval_stats_base.Metric.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – the name of the metric; if None use the class’ name attribute</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="sensai.evaluation.eval_stats.eval_stats_base.Metric.name">
+<code class="sig-name descname">name</code><em class="property">: str</em><a class="headerlink" href="#sensai.evaluation.eval_stats.eval_stats_base.Metric.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="sensai.evaluation.eval_stats.eval_stats_base.Metric.computeValueForEvalStats">
+<em class="property">abstract </em><code class="sig-name descname">computeValueForEvalStats</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">evalStats</span><span class="p">:</span> <span class="n">TEvalStats</span></em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#sensai.evaluation.eval_stats.eval_stats_base.Metric.computeValueForEvalStats" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sensai.evaluation.eval_stats.eval_stats_base.EvalStatsCollection">
+<em class="property">class </em><code class="sig-name descname">EvalStatsCollection</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwds</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jambit/sensAI/blob/master/src/sensai/evaluation/eval_stats/eval_stats_base.py#L74"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensai.evaluation.eval_stats.eval_stats_base.EvalStatsCollection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<dl class="py method">
+<dt id="sensai.evaluation.eval_stats.eval_stats_base.EvalStatsCollection.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">evalStatsList</span><span class="p">:</span> <span class="n">List<span class="p">[</span>TEvalStats<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.evaluation.eval_stats.eval_stats_base.EvalStatsCollection.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sensai.evaluation.eval_stats.eval_stats_base.EvalStatsCollection.getValues">
+<code class="sig-name descname">getValues</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">metric</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.evaluation.eval_stats.eval_stats_base.EvalStatsCollection.getValues" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="sensai.evaluation.eval_stats.eval_stats_base.EvalStatsCollection.aggStats">
+<code class="sig-name descname">aggStats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sensai.evaluation.eval_stats.eval_stats_base.EvalStatsCollection.aggStats" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="sensai.evaluation.eval_stats.eval_stats_base.EvalStatsCollection.meanStats">
+<code class="sig-name descname">meanStats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sensai.evaluation.eval_stats.eval_stats_base.EvalStatsCollection.meanStats" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="sensai.evaluation.eval_stats.eval_stats_base.EvalStatsCollection.plotDistribution">
+<code class="sig-name descname">plotDistribution</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">metric</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.evaluation.eval_stats.eval_stats_base.EvalStatsCollection.plotDistribution" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="sensai.evaluation.eval_stats.eval_stats_base.EvalStatsCollection.toDataFrame">
+<code class="sig-name descname">toDataFrame</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#sensai.evaluation.eval_stats.eval_stats_base.EvalStatsCollection.toDataFrame" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a DataFrame with the evaluation metrics from all contained EvalStats objects;
+the EvalStats’ name field being used as the index if it is set</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sensai.evaluation.eval_stats.eval_stats_base.EvalStatsCollection.getGlobalStats">
+<em class="property">abstract </em><code class="sig-name descname">getGlobalStats</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; TEvalStats<a class="headerlink" href="#sensai.evaluation.eval_stats.eval_stats_base.EvalStatsCollection.getGlobalStats" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sensai.evaluation.eval_stats.eval_stats_base.PredictionEvalStats">
+<em class="property">class </em><code class="sig-name descname">PredictionEvalStats</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwds</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jambit/sensAI/blob/master/src/sensai/evaluation/eval_stats/eval_stats_base.py#L122"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensai.evaluation.eval_stats.eval_stats_base.PredictionEvalStats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sensai.evaluation.eval_stats.eval_stats_base.EvalStats" title="sensai.evaluation.eval_stats.eval_stats_base.EvalStats"><code class="xref py py-class docutils literal notranslate"><span class="pre">sensai.evaluation.eval_stats.eval_stats_base.EvalStats</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Collects data for the evaluation of predicted labels (including multi-dimensional predictions)
+and computes corresponding metrics</p>
+<dl class="py method">
+<dt id="sensai.evaluation.eval_stats.eval_stats_base.PredictionEvalStats.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">y_predicted</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>numpy.ndarray<span class="p">, </span>pandas.core.series.Series<span class="p">, </span>pandas.core.frame.DataFrame<span class="p">, </span>list<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">y_true</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>numpy.ndarray<span class="p">, </span>pandas.core.series.Series<span class="p">, </span>pandas.core.frame.DataFrame<span class="p">, </span>list<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">metrics</span><span class="p">:</span> <span class="n">List<span class="p">[</span>TMetric<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">additionalMetrics</span><span class="p">:</span> <span class="n">List<span class="p">[</span>TMetric<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.evaluation.eval_stats.eval_stats_base.PredictionEvalStats.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y_predicted</strong> – sequence of predicted labels. In case of multi-dimensional predictions, a data frame with
+one column per dimension should be passed</p></li>
+<li><p><strong>y_true</strong> – sequence of ground truth labels of same shape as y_predicted</p></li>
+<li><p><strong>metrics</strong> – list of metrics to be computed on the provided data</p></li>
+<li><p><strong>additionalMetrics</strong> – the metrics to additionally compute. This should only be provided if metrics is None</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="sensai.evaluation.eval_stats.eval_stats_base.meanStats">
+<code class="sig-name descname">meanStats</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">evalStatsList</span><span class="p">:</span> <span class="n">Sequence<span class="p">[</span><a class="reference internal" href="#sensai.evaluation.eval_stats.eval_stats_base.EvalStats" title="sensai.evaluation.eval_stats.eval_stats_base.EvalStats">sensai.evaluation.eval_stats.eval_stats_base.EvalStats</a><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span>str<span class="p">, </span>float<span class="p">]</span><a class="reference external" href="https://github.com/jambit/sensAI/blob/master/src/sensai/evaluation/eval_stats/eval_stats_base.py#L191"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensai.evaluation.eval_stats.eval_stats_base.meanStats" title="Permalink to this definition">¶</a></dt>
+<dd><p>For a list of EvalStats objects compute the mean values of all metrics in a dictionary.
+Assumes that all provided EvalStats have the same metrics</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="eval_stats_classification.html" class="btn btn-neutral float-right" title="eval_stats_classification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../eval_stats.html" class="btn btn-neutral float-left" title="eval_stats" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright .
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

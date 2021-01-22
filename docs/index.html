@@ -1,0 +1,398 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>sensAI - the Python library for sensible AI &mdash; sensAI 0.0.5.dev0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Evaluating clustering algorithms" href="Clustering%20Evaluation.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home"> sensAI
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Guides and Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Clustering%20Evaluation.html">Evaluating clustering algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Intro%20to%20Coordinate%20Clustering.html">The Coordinate Clustering Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Intro%20to%20sensAI.html">Lightning intro to sensAI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tracking%20Experiments.html">Tracking sensAI experiments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting started</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sensai/index.html">Modules</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">sensAI</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>sensAI - the Python library for sensible AI</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="sensai-the-python-library-for-sensible-ai">
+<h1>sensAI - the Python library for sensible AI<a class="headerlink" href="#sensai-the-python-library-for-sensible-ai" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Guides and Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Clustering%20Evaluation.html">Evaluating clustering algorithms</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Clustering%20Evaluation.html#Before-running-the-notebook">Before running the notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Clustering%20Evaluation.html#Evaluating-a-single-model">Evaluating a single model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Clustering%20Evaluation.html#Model-selection">Model selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Clustering%20Evaluation.html#Dealing-with-ground-truth-labels">Dealing with ground truth labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Clustering%20Evaluation.html#Supervised-parameter-estimation">Supervised parameter estimation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Intro%20to%20Coordinate%20Clustering.html">The Coordinate Clustering Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Intro%20to%20Coordinate%20Clustering.html#Before-running-the-notebook">Before running the notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Intro%20to%20Coordinate%20Clustering.html#Loading-and-Fitting">Loading and Fitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Intro%20to%20Coordinate%20Clustering.html#Analysis-and-Visualization">Analysis and Visualization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Intro%20to%20Coordinate%20Clustering.html#Properties-of-a-single-cluster">Properties of a single cluster</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Intro%20to%20Coordinate%20Clustering.html#Saving-and-Loading">Saving and Loading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Intro%20to%20sensAI.html">Lightning intro to sensAI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Intro%20to%20sensAI.html#Before-running-the-notebook">Before running the notebook</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Intro%20to%20sensAI.html#Loading-the-dataset">Loading the dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Intro%20to%20sensAI.html#Creating-a-Custom-Model">Creating a Custom Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Intro%20to%20sensAI.html#Feature-Generation-and-Normalization">Feature Generation and Normalization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Intro%20to%20sensAI.html#Defining-Feature-Generators">Defining Feature Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Intro%20to%20sensAI.html#The-Feature-Registry">The Feature Registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Intro%20to%20sensAI.html#Normalization-of-Input-and-Target">Normalization of Input and Target</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Intro%20to%20sensAI.html#Combining-Everything-with-the-Model">Combining Everything with the Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Intro%20to%20sensAI.html#SensAI-Featuregen-vs.-Sklearn-Pipelines">SensAI Featuregen vs. Sklearn Pipelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Intro%20to%20sensAI.html#Model-Evaluation">Model Evaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Intro%20to%20sensAI.html#Things-we-left-out-in-this-intro">Things we left out in this intro</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Tracking%20Experiments.html">Tracking sensAI experiments</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Tracking%20Experiments.html#Evaluators">Evaluators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Tracking%20Experiments.html#Setup-tracking">Setup tracking</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting started</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sensai/index.html">Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="sensai/catboost.html">catboost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensai/clustering.html">clustering</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sensai/clustering/base.html">base</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sensai/clustering/base/clustering.html">clustering</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/clustering/coordinate_clustering.html">coordinate_clustering</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/clustering/greedy_clustering.html">greedy_clustering</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sensai/columngen.html">columngen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensai/data_ingest.html">data_ingest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensai/data_transformation.html">data_transformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensai/distance_metric.html">distance_metric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensai/ensemble.html">ensemble</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sensai/ensemble/ensemble_base.html">ensemble_base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/ensemble/models.html">models</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sensai/evaluation.html">evaluation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sensai/evaluation/clustering_ground_truth.html">clustering_ground_truth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/evaluation/crossval.html">crossval</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/evaluation/eval_stats.html">eval_stats</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="sensai/evaluation/eval_stats/eval_stats_base.html">eval_stats_base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sensai/evaluation/eval_stats/eval_stats_classification.html">eval_stats_classification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sensai/evaluation/eval_stats/eval_stats_clustering.html">eval_stats_clustering</a></li>
+<li class="toctree-l4"><a class="reference internal" href="sensai/evaluation/eval_stats/eval_stats_regression.html">eval_stats_regression</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/evaluation/eval_util.html">eval_util</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/evaluation/evaluator.html">evaluator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/evaluation/evaluator_clustering.html">evaluator_clustering</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sensai/featuregen.html">featuregen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensai/hyperopt.html">hyperopt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensai/lightgbm.html">lightgbm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensai/local_search.html">local_search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensai/naive_bayes.html">naive_bayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensai/nearest_neighbors.html">nearest_neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensai/normalisation.html">normalisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sensai/sklearn.html">sklearn</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sensai/sklearn/sklearn_base.html">sklearn_base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/sklearn/sklearn_classification.html">sklearn_classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/sklearn/sklearn_regression.html">sklearn_regression</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sensai/tensorflow.html">tensorflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sensai/tensorflow/tf_base.html">tf_base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/tensorflow/tf_mlp.html">tf_mlp</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sensai/torch.html">torch</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sensai/torch/torch_base.html">torch_base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/torch/torch_data.html">torch_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/torch/torch_models.html">torch_models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/torch/torch_modules.html">torch_modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/torch/torch_opt.html">torch_opt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/torch/torchtext.html">torchtext</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sensai/tracking.html">tracking</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sensai/tracking/azure_tracking.html">azure_tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/tracking/clearml_tracking.html">clearml_tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/tracking/mlflow_tracking.html">mlflow_tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/tracking/tracking_base.html">tracking_base</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sensai/util.html">util</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="sensai/util/cache.html">cache</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/util/cache_mysql.html">cache_mysql</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/util/coordinates.html">coordinates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/util/datastruct.html">datastruct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/util/dtype.html">dtype</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/util/geometry.html">geometry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/util/graph.html">graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/util/hash.html">hash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/util/io.html">io</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/util/math.html">math</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/util/multiprocessing.html">multiprocessing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/util/pandas.html">pandas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/util/pickle.html">pickle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/util/plot.html">plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/util/sequences.html">sequences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/util/string.html">string</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/util/tracking.html">tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensai/util/typing.html">typing</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sensai/vector_model.html">vector_model</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="Clustering%20Evaluation.html" class="btn btn-neutral float-right" title="Evaluating clustering algorithms" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright .
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,1171 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Lightning intro to sensAI &mdash; sensAI 0.0.5.dev0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tracking sensAI experiments" href="Tracking%20Experiments.html" />
+    <link rel="prev" title="The Coordinate Clustering Module" href="Intro%20to%20Coordinate%20Clustering.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> sensAI
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Guides and Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Clustering%20Evaluation.html">Evaluating clustering algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Intro%20to%20Coordinate%20Clustering.html">The Coordinate Clustering Module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Lightning intro to sensAI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Before-running-the-notebook">Before running the notebook</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Loading-the-dataset">Loading the dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Creating-a-Custom-Model">Creating a Custom Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Feature-Generation-and-Normalization">Feature Generation and Normalization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Defining-Feature-Generators">Defining Feature Generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#The-Feature-Registry">The Feature Registry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Normalization-of-Input-and-Target">Normalization of Input and Target</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Combining-Everything-with-the-Model">Combining Everything with the Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#SensAI-Featuregen-vs.-Sklearn-Pipelines">SensAI Featuregen vs. Sklearn Pipelines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Model-Evaluation">Model Evaluation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Things-we-left-out-in-this-intro">Things we left out in this intro</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Tracking%20Experiments.html">Tracking sensAI experiments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting started</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="sensai/index.html">Modules</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">sensAI</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Lightning intro to sensAI</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/Intro to sensAI.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="Lightning-intro-to-sensAI">
+<h1>Lightning intro to sensAI<a class="headerlink" href="#Lightning-intro-to-sensAI" title="Permalink to this headline">¶</a></h1>
+<p>In this notebook we will demonstrate some of sensAI’s main features by training a model together with feature extractors and custom normalization rules. This will also demonstrate how easy it is to wrap one’s own model declaration into a sensAI model.</p>
+<div class="section" id="Before-running-the-notebook">
+<h2>Before running the notebook<a class="headerlink" href="#Before-running-the-notebook" title="Permalink to this headline">¶</a></h2>
+<p>Install the package and its dependencies, if you haven’t done so already. E.g. for an editable install call</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>from the root directory. You can also execute this command directly in the notebook but will need to reload the kernel afterwards</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Note - this cell should be executed only once per session</span>
+
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+
+<span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">os</span>
+
+<span class="c1"># in order to get the top level modules; they are not part of the package</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;..&quot;</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sensai</span> <span class="k">as</span> <span class="nn">sn</span>
+<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <span class="n">MLPRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">MaxAbsScaler</span><span class="p">,</span> <span class="n">MinMaxScaler</span>
+<span class="kn">from</span> <span class="nn">sensai</span> <span class="kn">import</span> <span class="n">VectorRegressionModel</span>
+<span class="kn">from</span> <span class="nn">sensai.data_transformation</span> <span class="kn">import</span> <span class="n">DFTNormalisation</span>
+<span class="kn">from</span> <span class="nn">sensai.evaluation.eval_util</span> <span class="kn">import</span> <span class="n">createVectorModelEvaluator</span>
+<span class="kn">from</span> <span class="nn">sensai.data_ingest</span> <span class="kn">import</span> <span class="n">InputOutputData</span>
+<span class="kn">from</span> <span class="nn">sensai.tracking.clearml_tracking</span> <span class="kn">import</span> <span class="n">ClearMLExperiment</span>
+<span class="kn">import</span> <span class="nn">sensai.featuregen</span> <span class="k">as</span> <span class="nn">fgen</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">config</span> <span class="kn">import</span> <span class="n">get_config</span>
+
+<span class="n">c</span>  <span class="o">=</span> <span class="n">get_config</span><span class="p">(</span><span class="n">reload</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO:config.__Configuration:Reading configuration from /home/runner/work/sensAI/sensAI/config.json
+</pre></div></div>
+</div>
+<div class="section" id="Loading-the-dataset">
+<h3>Loading the dataset<a class="headerlink" href="#Loading-the-dataset" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">housing_data</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">datafile_path</span><span class="p">(</span><span class="s2">&quot;boston_housing.csv&quot;</span><span class="p">,</span> <span class="n">stage</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">RAW</span><span class="p">)</span>
+<span class="n">housing_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">housing_data</span><span class="p">)</span>
+
+<span class="n">housing_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>crim</th>
+      <th>zn</th>
+      <th>indus</th>
+      <th>chas</th>
+      <th>nox</th>
+      <th>rm</th>
+      <th>age</th>
+      <th>dis</th>
+      <th>rad</th>
+      <th>tax</th>
+      <th>ptratio</th>
+      <th>b</th>
+      <th>lstat</th>
+      <th>medv</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.00632</td>
+      <td>18.0</td>
+      <td>2.31</td>
+      <td>0</td>
+      <td>0.538</td>
+      <td>6.575</td>
+      <td>65.2</td>
+      <td>4.0900</td>
+      <td>1</td>
+      <td>296</td>
+      <td>15.3</td>
+      <td>396.90</td>
+      <td>4.98</td>
+      <td>24.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.02731</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0</td>
+      <td>0.469</td>
+      <td>6.421</td>
+      <td>78.9</td>
+      <td>4.9671</td>
+      <td>2</td>
+      <td>242</td>
+      <td>17.8</td>
+      <td>396.90</td>
+      <td>9.14</td>
+      <td>21.6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.02729</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0</td>
+      <td>0.469</td>
+      <td>7.185</td>
+      <td>61.1</td>
+      <td>4.9671</td>
+      <td>2</td>
+      <td>242</td>
+      <td>17.8</td>
+      <td>392.83</td>
+      <td>4.03</td>
+      <td>34.7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.03237</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0</td>
+      <td>0.458</td>
+      <td>6.998</td>
+      <td>45.8</td>
+      <td>6.0622</td>
+      <td>3</td>
+      <td>222</td>
+      <td>18.7</td>
+      <td>394.63</td>
+      <td>2.94</td>
+      <td>33.4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.06905</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0</td>
+      <td>0.458</td>
+      <td>7.147</td>
+      <td>54.2</td>
+      <td>6.0622</td>
+      <td>3</td>
+      <td>222</td>
+      <td>18.7</td>
+      <td>396.90</td>
+      <td>5.33</td>
+      <td>36.2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">X</span> <span class="o">=</span> <span class="n">housing_df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;nox&quot;</span><span class="p">:</span> <span class="n">X</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;nox&quot;</span><span class="p">)})</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;We will use this as target&quot;</span><span class="p">)</span>
+<span class="n">y</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+We will use this as target
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>nox</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.538</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.469</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.469</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.458</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.458</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</div>
+<div class="section" id="Creating-a-Custom-Model">
+<h3>Creating a Custom Model<a class="headerlink" href="#Creating-a-Custom-Model" title="Permalink to this headline">¶</a></h3>
+<p>Although sensAI provides several implementations of different models across major frameworks (SKlearn, TensorFlow, PyTorch), we put special care to make it easy for you to bring your own model. The <code class="docutils literal notranslate"><span class="pre">VectorModel</span></code> based classes provides abstractions which can be used for most learning problems of the type “datapoint in, row of predictions out”. The row of predictions can contain a vector with class probabilities, one or multiple regression targets and so on. For problems of the type: “datapoint
+in, multidimensional tensor out”, see the tutorial in TBA.</p>
+<p>We will use VectorModel to wrap scikit-learn’s implementation of a multi layer perceptron.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">class</span> <span class="nc">CustomModel</span><span class="p">(</span><span class="n">VectorRegressionModel</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">MLPRegressor</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;nox&quot;</span><span class="p">:</span> <span class="n">values</span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">Y</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Feature-Generation-and-Normalization">
+<h3>Feature Generation and Normalization<a class="headerlink" href="#Feature-Generation-and-Normalization" title="Permalink to this headline">¶</a></h3>
+<p>Some of sensAI’s core design principles include explicitness and safety of data wrangling. Special care was taken to ensure that everything that happens to input data during feature extraction, preprocessing, training and inference was intended by the user. Since for many projects feature engineering is decisive for model performance, it is absolutely crucial that the developer has full control over all transformations that are going on during training and inference.</p>
+<p>The feature generation and normalization modules helps with this, allowing fine-grained control over each step in the processing pipeline. Since the feature generators and the normalization data frame transforms can be bound to a sensAI model, it is guaranteed that the data pipeline at inference will work exactly as intended. If something unexpected happens at inference time, like an unknown column, wrong order of columns etc, an error will be raised. Errors will also be raised (unless
+specifically disabled) if there are columns for which no normalization rules have been provided for columns. This ensures that the user has thought about how to deal with different features and that no surprises happen.</p>
+<p>This level of control comes at the price of verbosity. sensAI classes and arguments tend to have long names, explaining exactly what they do and what the intended use case looks like.</p>
+<p>Below we will show an example of feature engineering.</p>
+</div>
+</div>
+<div class="section" id="Defining-Feature-Generators">
+<h2>Defining Feature Generators<a class="headerlink" href="#Defining-Feature-Generators" title="Permalink to this headline">¶</a></h2>
+<p>Below we will define two feature generators. One will compensate the tax for fraud, by assuming that if the declared tax in the dataframe is above a threshold, we have to subtract some fixed value that was lied about. The threshold is extracted from the dataframe when the feature generator is fit.</p>
+<p>The second feature generator simply takes the columns “crim” and “age” as is and marks that they should be normalized.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">class</span> <span class="nc">TaxFraudFeaturegen</span><span class="p">(</span><span class="n">fgen</span><span class="o">.</span><span class="n">FeatureGenerator</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tax_column</span><span class="o">=</span><span class="s2">&quot;tax&quot;</span><span class="p">,</span> <span class="n">value_lied_about</span><span class="o">=</span><span class="mf">12.0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value_lied_about</span> <span class="o">=</span> <span class="n">value_lied_about</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tax_column</span> <span class="o">=</span> <span class="n">tax_column</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">normalisationRuleTemplate</span><span class="o">=</span><span class="n">DFTNormalisation</span><span class="o">.</span><span class="n">RuleTemplate</span><span class="p">(</span>
+                <span class="n">transformer</span><span class="o">=</span><span class="n">MinMaxScaler</span><span class="p">()</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">Y</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">ctx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tax_column</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">compensate_for_fraud</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tax</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">tax</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">:</span>
+            <span class="n">tax</span> <span class="o">=</span> <span class="n">tax</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_lied_about</span>
+        <span class="k">return</span> <span class="n">tax</span>
+
+    <span class="k">def</span> <span class="nf">_generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">ctx</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="n">result</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tax_column</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tax_column</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">compensate_for_fraud</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="n">crime_age_featuregen</span> <span class="o">=</span> <span class="n">fgen</span><span class="o">.</span><span class="n">FeatureGeneratorTakeColumns</span><span class="p">(</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;crim&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">],</span>
+    <span class="n">normalisationRuleTemplate</span><span class="o">=</span><span class="n">DFTNormalisation</span><span class="o">.</span><span class="n">RuleTemplate</span><span class="p">(</span><span class="n">skip</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="The-Feature-Registry">
+<h2>The Feature Registry<a class="headerlink" href="#The-Feature-Registry" title="Permalink to this headline">¶</a></h2>
+<p>We could simply take the feature generators as they are and plug them into our model but instead we demonstrate one more class in sensAI: the feature registry. Creating a registry is convenient for rapid experimentation and for keeping track of useful features in a large project. You might not know which ones will be useful for which model so the registry abstraction helps you checking in features into git and staying organized.</p>
+<p>Here we create the a dedicated registry for the housing features. The registry will hold factories of featuregens which will create singleton instances if called withing the training/inference pipeline (this is optional). The collector is pinned to a registry and allows to call the registered features by name (if desired). This might not make much sense in a notebook but imagine having a central feature registry somewhere in you code. This way you can combine the registered features with some
+features that you cooked up in a script, all in a few lines of code.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">housing_feature_registry</span> <span class="o">=</span> <span class="n">fgen</span><span class="o">.</span><span class="n">FeatureGeneratorRegistry</span><span class="p">(</span><span class="n">useSingletons</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">housing_feature_registry</span><span class="o">.</span><span class="n">tax</span> <span class="o">=</span> <span class="n">TaxFraudFeaturegen</span>
+
+<span class="n">feature_collector</span> <span class="o">=</span> <span class="n">fgen</span><span class="o">.</span><span class="n">FeatureCollector</span><span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">,</span> <span class="n">crime_age_featuregen</span><span class="p">,</span> <span class="n">registry</span><span class="o">=</span><span class="n">housing_feature_registry</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Normalization-of-Input-and-Target">
+<h2>Normalization of Input and Target<a class="headerlink" href="#Normalization-of-Input-and-Target" title="Permalink to this headline">¶</a></h2>
+<p>Now we come to the issue of normalization. In each feature generator we have declared how the resulting columns should be normalized. We can use this information by instantiating <code class="docutils literal notranslate"><span class="pre">DFTNormalisation</span></code>. If a rule for some column is missing, the normalization object will raise an error. There is a way to circumvent this error - set <code class="docutils literal notranslate"><span class="pre">requireAllHandled</span></code> to False. In that case, you should probably use a defaultTransformerFactory to normalize all remaining columns. However, we recommend to explicitly
+pass all normalization rules to the feature generators themselves, just to be sure that nothing is missing.</p>
+<p>For normalizing the target we have to use an invertible transformer, we will take the MaxAbsScaler here.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">dft_normalisation</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">data_transformation</span><span class="o">.</span><span class="n">DFTNormalisation</span><span class="p">(</span>
+    <span class="n">feature_collector</span><span class="o">.</span><span class="n">getNormalizationRules</span><span class="p">(),</span>
+    <span class="n">requireAllHandled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">target_transformer</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">data_transformation</span><span class="o">.</span><span class="n">DFTSkLearnTransformer</span><span class="p">(</span><span class="n">MaxAbsScaler</span><span class="p">())</span>
+
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Combining-Everything-with-the-Model">
+<h2>Combining Everything with the Model<a class="headerlink" href="#Combining-Everything-with-the-Model" title="Permalink to this headline">¶</a></h2>
+<p>Now we can plug all these components into our vector model and enjoy a safe and robust that will work during training and inference. The model already has methods for saving and loading and is ready to be deployed.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">custom_model</span> <span class="o">=</span> <span class="n">CustomModel</span><span class="p">()</span>
+
+<span class="n">custom_model</span> <span class="o">=</span> <span class="n">custom_model</span> \
+    <span class="o">.</span><span class="n">withFeatureCollector</span><span class="p">(</span><span class="n">feature_collector</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">withInputTransformers</span><span class="p">(</span><span class="n">dft_normalisation</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">withTargetTransformer</span><span class="p">(</span><span class="n">target_transformer</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">withName</span><span class="p">(</span><span class="s2">&quot;housing_predictor&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">custom_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">custom_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO:sensai.vector_model:Training CustomModel
+INFO:sensai.vector_model:Training with outputs[1]=[&#39;nox&#39;], inputs[3]=[tax/float64, crim/float64, age/float64]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>nox</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.527393</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.547913</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.510636</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.476953</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.493785</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="section" id="SensAI-Featuregen-vs.-Sklearn-Pipelines">
+<h3>SensAI Featuregen vs. Sklearn Pipelines<a class="headerlink" href="#SensAI-Featuregen-vs.-Sklearn-Pipelines" title="Permalink to this headline">¶</a></h3>
+<p>TBA</p>
+</div>
+<div class="section" id="Model-Evaluation">
+<h3>Model Evaluation<a class="headerlink" href="#Model-Evaluation" title="Permalink to this headline">¶</a></h3>
+<p>sensAI has extensive support for evaluating different types of models with different methods, including cross validation. The evaluation has native support for experiment tracking frameworks, like clearML or MLflow. Here we will use clearML, so after running this notebook you will be able to see the result in the clearML demo-server.</p>
+<p>The evaluation is generally based on the following structure: an <code class="docutils literal notranslate"><span class="pre">Evaluator</span></code> object holds a dataset. An <code class="docutils literal notranslate"><span class="pre">Evaluator</span></code> can evaluate multiple models by calling <code class="docutils literal notranslate"><span class="pre">Evaluator.evalModel(model)</span></code>, this ensures that the same kind of evaluation is performed and thus the results can be compared in meaningful way (the latter is crucial for model selection). This <code class="docutils literal notranslate"><span class="pre">.evalModel(model)</span></code> call returns an EvalData object, h olding the evaluation data and containing methods for computing metrics and
+visualization.</p>
+<p>Similarly, a <code class="docutils literal notranslate"><span class="pre">CrossValidator</span></code> holds data and can perform cross validation,</p>
+<p>Below we will show a simple example for that, using the lower-level evaluation interfaces. There is also a higher level evaluation interfaces in the eval_util module, we will leave that to a separate intro.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">io_data</span> <span class="o">=</span> <span class="n">InputOutputData</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">clearml_experiment</span> <span class="o">=</span> <span class="n">ClearMLExperiment</span><span class="p">(</span><span class="n">projectName</span><span class="o">=</span><span class="s2">&quot;sensai_demo&quot;</span><span class="p">,</span> <span class="n">taskName</span><span class="o">=</span><span class="s2">&quot;custom_model&quot;</span><span class="p">)</span>
+<span class="n">evaluator</span> <span class="o">=</span> <span class="n">createVectorModelEvaluator</span><span class="p">(</span><span class="n">io_data</span><span class="p">,</span> <span class="n">isRegression</span><span class="o">=</span><span class="n">custom_model</span><span class="o">.</span><span class="n">isRegressionModel</span><span class="p">(),</span>
+                                       <span class="n">testFraction</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">evaluator</span><span class="o">.</span><span class="n">setTrackedExperiment</span><span class="p">(</span><span class="n">clearml_experiment</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ClearML Task: created new task id=1dacfa4f25f840d9882ca0b2fb6f76c9
+ClearML results page: https://demoapp.demo.clear.ml/projects/6d423d5af89647998d6826db62325dea/experiments/1dacfa4f25f840d9882ca0b2fb6f76c9/output/log
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">new_custom_model</span> <span class="o">=</span> <span class="n">CustomModel</span><span class="p">()</span> \
+    <span class="o">.</span><span class="n">withFeatureCollector</span><span class="p">(</span><span class="n">feature_collector</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">withInputTransformers</span><span class="p">(</span><span class="n">dft_normalisation</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">withTargetTransformer</span><span class="p">(</span><span class="n">target_transformer</span><span class="p">)</span> \
+    <span class="o">.</span><span class="n">withName</span><span class="p">(</span><span class="s2">&quot;housing_predictor&quot;</span><span class="p">)</span>
+
+<span class="n">evaluator</span><span class="o">.</span><span class="n">fitModel</span><span class="p">(</span><span class="n">new_custom_model</span><span class="p">)</span>
+<span class="n">eval_stats</span> <span class="o">=</span> <span class="n">evaluator</span><span class="o">.</span><span class="n">evalModel</span><span class="p">(</span><span class="n">new_custom_model</span><span class="p">)</span><span class="o">.</span><span class="n">getEvalStats</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO:sensai.vector_model:Training CustomModel
+INFO:sensai.vector_model:Training with outputs[1]=[&#39;nox&#39;], inputs[3]=[tax/float64, crim/float64, age/float64]
+INFO:sensai.evaluation.evaluator:Training of CustomModel completed in 0.5 seconds
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">eval_stats</span><span class="o">.</span><span class="n">getAll</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+INFO:sensai.util.tracking:Finished execution of getAll in 0.00s
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;RRSE&#39;: 0.7443694711019345, &#39;R2&#39;: 0.4459140904914263, &#39;PCC&#39;: 0.799516647155934, &#39;MAE&#39;: 0.06565383458946615, &#39;MSE&#39;: 0.007170218478675961, &#39;RMSE&#39;: 0.08467714259867276, &#39;StdDevAE&#39;: 0.053477027613499414}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">eval_stats</span><span class="o">.</span><span class="n">plotScatterGroundTruthPredictions</span><span class="p">()</span>
+<span class="n">eval_stats</span><span class="o">.</span><span class="n">plotErrorDistribution</span><span class="p">()</span>
+<span class="n">eval_stats</span><span class="o">.</span><span class="n">plotHeatmapGroundTruthPredictions</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Demonstrating plotting capabilities&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ClearML new version available: upgrade to v0.17.4 is recommended!
+ClearML Monitor: GPU monitoring failed getting GPU reading, switching off GPU monitoring
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/Intro_to_sensAI_26_1.png" src="_images/Intro_to_sensAI_26_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/Intro_to_sensAI_26_2.png" src="_images/Intro_to_sensAI_26_2.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/Intro_to_sensAI_26_3.png" src="_images/Intro_to_sensAI_26_3.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Demonstrating plotting capabilities
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython2 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">eval_stats</span><span class="o">.</span><span class="n">plotScatterGroundTruthPredictions</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/Intro_to_sensAI_27_0.png" src="_images/Intro_to_sensAI_27_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Things-we-left-out-in-this-intro">
+<h3>Things we left out in this intro<a class="headerlink" href="#Things-we-left-out-in-this-intro" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Already implemented models and feature generators</p></li>
+<li><p>Caching (this is actually one of the central features)</p></li>
+<li><p>Support for ensembling and parallelization</p></li>
+<li><p>The local search and hyperopt modules, including grid-search, simulated-annealing and other stuff</p></li>
+<li><p>kNN and clustering implementations</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="Tracking%20Experiments.html" class="btn btn-neutral float-right" title="Tracking sensAI experiments" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Intro%20to%20Coordinate%20Clustering.html" class="btn btn-neutral float-left" title="The Coordinate Clustering Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright .
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

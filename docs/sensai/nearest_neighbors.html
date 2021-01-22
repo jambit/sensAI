@@ -1,0 +1,507 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>nearest_neighbors &mdash; sensAI 0.0.5.dev0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="normalisation" href="normalisation.html" />
+    <link rel="prev" title="naive_bayes" href="naive_bayes.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> sensAI
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Guides and Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Clustering%20Evaluation.html">Evaluating clustering algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Intro%20to%20Coordinate%20Clustering.html">The Coordinate Clustering Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Intro%20to%20sensAI.html">Lightning intro to sensAI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Tracking%20Experiments.html">Tracking sensAI experiments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting-started.html">Getting started</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="catboost.html">catboost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clustering.html">clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="columngen.html">columngen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_ingest.html">data_ingest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_transformation.html">data_transformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="distance_metric.html">distance_metric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble.html">ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="evaluation.html">evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="featuregen.html">featuregen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hyperopt.html">hyperopt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lightgbm.html">lightgbm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="local_search.html">local_search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="naive_bayes.html">naive_bayes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">nearest_neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="normalisation.html">normalisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sklearn.html">sklearn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tensorflow.html">tensorflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="torch.html">torch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tracking.html">tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html">util</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vector_model.html">vector_model</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">sensAI</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Modules</a> &raquo;</li>
+        
+      <li>nearest_neighbors</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/sensai/nearest_neighbors.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-sensai.nearest_neighbors">
+<span id="nearest-neighbors"></span><h1>nearest_neighbors<a class="headerlink" href="#module-sensai.nearest_neighbors" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="sensai.nearest_neighbors.Neighbor">
+<em class="property">class </em><code class="sig-name descname">Neighbor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span><span class="p">:</span> <span class="n"><a class="reference internal" href="util/typing.html#sensai.util.typing.PandasNamedTuple" title="sensai.util.typing.PandasNamedTuple">sensai.util.typing.PandasNamedTuple</a></span></em>, <em class="sig-param"><span class="n">distance</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jambit/sensAI/blob/master/src/sensai/nearest_neighbors.py#L21"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensai.nearest_neighbors.Neighbor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="sensai.nearest_neighbors.Neighbor.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span><span class="p">:</span> <span class="n"><a class="reference internal" href="util/typing.html#sensai.util.typing.PandasNamedTuple" title="sensai.util.typing.PandasNamedTuple">sensai.util.typing.PandasNamedTuple</a></span></em>, <em class="sig-param"><span class="n">distance</span><span class="p">:</span> <span class="n">float</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.nearest_neighbors.Neighbor.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sensai.nearest_neighbors.NeighborProvider">
+<em class="property">class </em><code class="sig-name descname">NeighborProvider</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dfIndexedById</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jambit/sensAI/blob/master/src/sensai/nearest_neighbors.py#L28"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensai.nearest_neighbors.NeighborProvider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<dl class="py method">
+<dt id="sensai.nearest_neighbors.NeighborProvider.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dfIndexedById</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.nearest_neighbors.NeighborProvider.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sensai.nearest_neighbors.NeighborProvider.iterPotentialNeighbors">
+<em class="property">abstract </em><code class="sig-name descname">iterPotentialNeighbors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span><span class="p">:</span> <span class="n"><a class="reference internal" href="util/typing.html#sensai.util.typing.PandasNamedTuple" title="sensai.util.typing.PandasNamedTuple">sensai.util.typing.PandasNamedTuple</a></span></em><span class="sig-paren">)</span> &#x2192; Iterable<span class="p">[</span><a class="reference internal" href="util/typing.html#sensai.util.typing.PandasNamedTuple" title="sensai.util.typing.PandasNamedTuple">sensai.util.typing.PandasNamedTuple</a><span class="p">]</span><a class="headerlink" href="#sensai.nearest_neighbors.NeighborProvider.iterPotentialNeighbors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sensai.nearest_neighbors.AllNeighborsProvider">
+<em class="property">class </em><code class="sig-name descname">AllNeighborsProvider</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dfIndexedById</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jambit/sensAI/blob/master/src/sensai/nearest_neighbors.py#L45"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensai.nearest_neighbors.AllNeighborsProvider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sensai.nearest_neighbors.NeighborProvider" title="sensai.nearest_neighbors.NeighborProvider"><code class="xref py py-class docutils literal notranslate"><span class="pre">sensai.nearest_neighbors.NeighborProvider</span></code></a></p>
+<dl class="py method">
+<dt id="sensai.nearest_neighbors.AllNeighborsProvider.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dfIndexedById</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.nearest_neighbors.AllNeighborsProvider.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sensai.nearest_neighbors.AllNeighborsProvider.iterPotentialNeighbors">
+<code class="sig-name descname">iterPotentialNeighbors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.nearest_neighbors.AllNeighborsProvider.iterPotentialNeighbors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sensai.nearest_neighbors.TimerangeNeighborsProvider">
+<em class="property">class </em><code class="sig-name descname">TimerangeNeighborsProvider</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dfIndexedById</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em>, <em class="sig-param"><span class="n">timestampsColumn</span><span class="o">=</span><span class="default_value">'timestamps'</span></em>, <em class="sig-param"><span class="n">pastTimeRangeDays</span><span class="o">=</span><span class="default_value">120</span></em>, <em class="sig-param"><span class="n">futureTimeRangeDays</span><span class="o">=</span><span class="default_value">120</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jambit/sensAI/blob/master/src/sensai/nearest_neighbors.py#L67"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensai.nearest_neighbors.TimerangeNeighborsProvider" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sensai.nearest_neighbors.NeighborProvider" title="sensai.nearest_neighbors.NeighborProvider"><code class="xref py py-class docutils literal notranslate"><span class="pre">sensai.nearest_neighbors.NeighborProvider</span></code></a></p>
+<dl class="py method">
+<dt id="sensai.nearest_neighbors.TimerangeNeighborsProvider.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dfIndexedById</span><span class="p">:</span> <span class="n">pandas.core.frame.DataFrame</span></em>, <em class="sig-param"><span class="n">timestampsColumn</span><span class="o">=</span><span class="default_value">'timestamps'</span></em>, <em class="sig-param"><span class="n">pastTimeRangeDays</span><span class="o">=</span><span class="default_value">120</span></em>, <em class="sig-param"><span class="n">futureTimeRangeDays</span><span class="o">=</span><span class="default_value">120</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.nearest_neighbors.TimerangeNeighborsProvider.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sensai.nearest_neighbors.TimerangeNeighborsProvider.iterPotentialNeighbors">
+<code class="sig-name descname">iterPotentialNeighbors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">value</span><span class="p">:</span> <span class="n"><a class="reference internal" href="util/typing.html#sensai.util.typing.PandasNamedTuple" title="sensai.util.typing.PandasNamedTuple">sensai.util.typing.PandasNamedTuple</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.nearest_neighbors.TimerangeNeighborsProvider.iterPotentialNeighbors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sensai.nearest_neighbors.AbstractKnnFinder">
+<em class="property">class </em><code class="sig-name descname">AbstractKnnFinder</code><a class="reference external" href="https://github.com/jambit/sensAI/blob/master/src/sensai/nearest_neighbors.py#L94"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensai.nearest_neighbors.AbstractKnnFinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<dl class="py method">
+<dt id="sensai.nearest_neighbors.AbstractKnnFinder.findNeighbors">
+<em class="property">abstract </em><code class="sig-name descname">findNeighbors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">namedTuple</span><span class="p">:</span> <span class="n"><a class="reference internal" href="util/typing.html#sensai.util.typing.PandasNamedTuple" title="sensai.util.typing.PandasNamedTuple">sensai.util.typing.PandasNamedTuple</a></span></em>, <em class="sig-param"><span class="n">n_neighbors</span><span class="o">=</span><span class="default_value">20</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#sensai.nearest_neighbors.Neighbor" title="sensai.nearest_neighbors.Neighbor">sensai.nearest_neighbors.Neighbor</a><span class="p">]</span><a class="headerlink" href="#sensai.nearest_neighbors.AbstractKnnFinder.findNeighbors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sensai.nearest_neighbors.CachingKNearestNeighboursFinder">
+<em class="property">class </em><code class="sig-name descname">CachingKNearestNeighboursFinder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cache</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#sensai.nearest_neighbors.CachingKNearestNeighboursFinder.DistanceMetricCache" title="sensai.nearest_neighbors.CachingKNearestNeighboursFinder.DistanceMetricCache">sensai.nearest_neighbors.CachingKNearestNeighboursFinder.DistanceMetricCache</a></span></em>, <em class="sig-param"><span class="n">distanceMetric</span><span class="p">:</span> <span class="n"><a class="reference internal" href="distance_metric.html#sensai.distance_metric.DistanceMetric" title="sensai.distance_metric.DistanceMetric">sensai.distance_metric.DistanceMetric</a></span></em>, <em class="sig-param"><span class="n">neighborProvider</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#sensai.nearest_neighbors.NeighborProvider" title="sensai.nearest_neighbors.NeighborProvider">sensai.nearest_neighbors.NeighborProvider</a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jambit/sensAI/blob/master/src/sensai/nearest_neighbors.py#L104"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensai.nearest_neighbors.CachingKNearestNeighboursFinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sensai.nearest_neighbors.AbstractKnnFinder" title="sensai.nearest_neighbors.AbstractKnnFinder"><code class="xref py py-class docutils literal notranslate"><span class="pre">sensai.nearest_neighbors.AbstractKnnFinder</span></code></a></p>
+<p>A nearest neighbor finder which uses a cache for distance metrics in order speed up repeated computations
+of the neighbors of the same data point by keeping a pandas.Series of distances to all provided
+data points cached. If the distance metric is of the composite type LinearCombinationDistanceMetric,
+its component distance metrics are cached, such that weights in the linear combination can be varied
+without necessitating recomputations.</p>
+<dl class="py method">
+<dt id="sensai.nearest_neighbors.CachingKNearestNeighboursFinder.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cache</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#sensai.nearest_neighbors.CachingKNearestNeighboursFinder.DistanceMetricCache" title="sensai.nearest_neighbors.CachingKNearestNeighboursFinder.DistanceMetricCache">sensai.nearest_neighbors.CachingKNearestNeighboursFinder.DistanceMetricCache</a></span></em>, <em class="sig-param"><span class="n">distanceMetric</span><span class="p">:</span> <span class="n"><a class="reference internal" href="distance_metric.html#sensai.distance_metric.DistanceMetric" title="sensai.distance_metric.DistanceMetric">sensai.distance_metric.DistanceMetric</a></span></em>, <em class="sig-param"><span class="n">neighborProvider</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#sensai.nearest_neighbors.NeighborProvider" title="sensai.nearest_neighbors.NeighborProvider">sensai.nearest_neighbors.NeighborProvider</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.nearest_neighbors.CachingKNearestNeighboursFinder.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="sensai.nearest_neighbors.CachingKNearestNeighboursFinder.DistanceMetricCache">
+<em class="property">class </em><code class="sig-name descname">DistanceMetricCache</code><a class="headerlink" href="#sensai.nearest_neighbors.CachingKNearestNeighboursFinder.DistanceMetricCache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A cache for distance metrics which identifies equivalent distance metrics by their string representations.
+The cache can be passed (consecutively) to multiple KNN models in order to speed up computations for the
+same test data points. If the cache is reused, it is assumed that the neighbor provider remains the same.</p>
+<dl class="py method">
+<dt id="sensai.nearest_neighbors.CachingKNearestNeighboursFinder.DistanceMetricCache.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sensai.nearest_neighbors.CachingKNearestNeighboursFinder.DistanceMetricCache.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sensai.nearest_neighbors.CachingKNearestNeighboursFinder.DistanceMetricCache.getCachedMetric">
+<code class="sig-name descname">getCachedMetric</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">distanceMetric</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.nearest_neighbors.CachingKNearestNeighboursFinder.DistanceMetricCache.getCachedMetric" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sensai.nearest_neighbors.CachingKNearestNeighboursFinder.CachedSeriesDistanceMetric">
+<em class="property">class </em><code class="sig-name descname">CachedSeriesDistanceMetric</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">distanceMetric</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.nearest_neighbors.CachingKNearestNeighboursFinder.CachedSeriesDistanceMetric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Provides caching for a wrapped distance metric: the series of all distances to provided potential neighbors
+are retained in a cache</p>
+<dl class="py method">
+<dt id="sensai.nearest_neighbors.CachingKNearestNeighboursFinder.CachedSeriesDistanceMetric.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">distanceMetric</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.nearest_neighbors.CachingKNearestNeighboursFinder.CachedSeriesDistanceMetric.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sensai.nearest_neighbors.CachingKNearestNeighboursFinder.CachedSeriesDistanceMetric.getDistanceSeries">
+<code class="sig-name descname">getDistanceSeries</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">namedTuple</span><span class="p">:</span> <span class="n"><a class="reference internal" href="util/typing.html#sensai.util.typing.PandasNamedTuple" title="sensai.util.typing.PandasNamedTuple">sensai.util.typing.PandasNamedTuple</a></span></em>, <em class="sig-param"><span class="n">potentialNeighborValues</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.nearest_neighbors.CachingKNearestNeighboursFinder.CachedSeriesDistanceMetric.getDistanceSeries" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt id="sensai.nearest_neighbors.CachingKNearestNeighboursFinder.findNeighbors">
+<code class="sig-name descname">findNeighbors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">namedTuple</span><span class="p">:</span> <span class="n"><a class="reference internal" href="util/typing.html#sensai.util.typing.PandasNamedTuple" title="sensai.util.typing.PandasNamedTuple">sensai.util.typing.PandasNamedTuple</a></span></em>, <em class="sig-param"><span class="n">n_neighbors</span><span class="o">=</span><span class="default_value">20</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#sensai.nearest_neighbors.Neighbor" title="sensai.nearest_neighbors.Neighbor">sensai.nearest_neighbors.Neighbor</a><span class="p">]</span><a class="headerlink" href="#sensai.nearest_neighbors.CachingKNearestNeighboursFinder.findNeighbors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sensai.nearest_neighbors.KNearestNeighboursFinder">
+<em class="property">class </em><code class="sig-name descname">KNearestNeighboursFinder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">distanceMetric</span><span class="p">:</span> <span class="n"><a class="reference internal" href="distance_metric.html#sensai.distance_metric.DistanceMetric" title="sensai.distance_metric.DistanceMetric">sensai.distance_metric.DistanceMetric</a></span></em>, <em class="sig-param"><span class="n">neighborProvider</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#sensai.nearest_neighbors.NeighborProvider" title="sensai.nearest_neighbors.NeighborProvider">sensai.nearest_neighbors.NeighborProvider</a></span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jambit/sensAI/blob/master/src/sensai/nearest_neighbors.py#L187"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensai.nearest_neighbors.KNearestNeighboursFinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sensai.nearest_neighbors.AbstractKnnFinder" title="sensai.nearest_neighbors.AbstractKnnFinder"><code class="xref py py-class docutils literal notranslate"><span class="pre">sensai.nearest_neighbors.AbstractKnnFinder</span></code></a></p>
+<dl class="py method">
+<dt id="sensai.nearest_neighbors.KNearestNeighboursFinder.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">distanceMetric</span><span class="p">:</span> <span class="n"><a class="reference internal" href="distance_metric.html#sensai.distance_metric.DistanceMetric" title="sensai.distance_metric.DistanceMetric">sensai.distance_metric.DistanceMetric</a></span></em>, <em class="sig-param"><span class="n">neighborProvider</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#sensai.nearest_neighbors.NeighborProvider" title="sensai.nearest_neighbors.NeighborProvider">sensai.nearest_neighbors.NeighborProvider</a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.nearest_neighbors.KNearestNeighboursFinder.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sensai.nearest_neighbors.KNearestNeighboursFinder.findNeighbors">
+<code class="sig-name descname">findNeighbors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">namedTuple</span><span class="p">:</span> <span class="n"><a class="reference internal" href="util/typing.html#sensai.util.typing.PandasNamedTuple" title="sensai.util.typing.PandasNamedTuple">sensai.util.typing.PandasNamedTuple</a></span></em>, <em class="sig-param"><span class="n">n_neighbors</span><span class="o">=</span><span class="default_value">20</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#sensai.nearest_neighbors.Neighbor" title="sensai.nearest_neighbors.Neighbor">sensai.nearest_neighbors.Neighbor</a><span class="p">]</span><a class="headerlink" href="#sensai.nearest_neighbors.KNearestNeighboursFinder.findNeighbors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sensai.nearest_neighbors.KNearestNeighboursClassificationModel">
+<em class="property">class </em><code class="sig-name descname">KNearestNeighboursClassificationModel</code><span class="sig-paren">(</span><em class="sig-param">numNeighbors: int, distanceMetric: sensai.distance_metric.DistanceMetric, neighborProviderFactory: Callable[[pandas.core.frame.DataFrame], sensai.nearest_neighbors.NeighborProvider] = &lt;class 'sensai.nearest_neighbors.AllNeighborsProvider'&gt;, distanceBasedWeighting=False, distanceEpsilon=0.001, distanceMetricCache: sensai.nearest_neighbors.CachingKNearestNeighboursFinder.DistanceMetricCache = None, **kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jambit/sensAI/blob/master/src/sensai/nearest_neighbors.py#L206"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensai.nearest_neighbors.KNearestNeighboursClassificationModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vector_model.html#sensai.vector_model.VectorClassificationModel" title="sensai.vector_model.VectorClassificationModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sensai.vector_model.VectorClassificationModel</span></code></a></p>
+<dl class="py method">
+<dt id="sensai.nearest_neighbors.KNearestNeighboursClassificationModel.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">numNeighbors: int, distanceMetric: sensai.distance_metric.DistanceMetric, neighborProviderFactory: Callable[[pandas.core.frame.DataFrame], sensai.nearest_neighbors.NeighborProvider] = &lt;class 'sensai.nearest_neighbors.AllNeighborsProvider'&gt;, distanceBasedWeighting=False, distanceEpsilon=0.001, distanceMetricCache: sensai.nearest_neighbors.CachingKNearestNeighboursFinder.DistanceMetricCache = None, **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.nearest_neighbors.KNearestNeighboursClassificationModel.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>numNeighbors</strong> – the number of nearest neighbors to consider</p></li>
+<li><p><strong>distanceMetric</strong> – the distance metric to use</p></li>
+<li><p><strong>neighborProviderFactory</strong> – a factory with which a neighbor provider can be constructed using data</p></li>
+<li><p><strong>distanceBasedWeighting</strong> – whether to weight neighbors according to their distance (inverse); if False, use democratic vote</p></li>
+<li><p><strong>distanceEpsilon</strong> – a distance that is added to all distances for distance-based weighting (in order to avoid 0 distances);</p></li>
+<li><p><strong>distanceMetricCache</strong> – a cache for distance metrics which shall be used to store speed up repeated computations
+of the neighbors of the same data point by keeping series of distances cached (particularly for composite distance metrics);
+see class CachingKNearestNeighboursFinder</p></li>
+<li><p><strong>kwargs</strong> – parameters to pass on to super-classes</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sensai.nearest_neighbors.KNearestNeighboursClassificationModel.findNeighbors">
+<code class="sig-name descname">findNeighbors</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">namedTuple</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.nearest_neighbors.KNearestNeighboursClassificationModel.findNeighbors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sensai.nearest_neighbors.KNearestNeighboursRegressionModel">
+<em class="property">class </em><code class="sig-name descname">KNearestNeighboursRegressionModel</code><span class="sig-paren">(</span><em class="sig-param">numNeighbors: int, distanceMetric: sensai.distance_metric.DistanceMetric, neighborProviderFactory: Callable[[pandas.core.frame.DataFrame], sensai.nearest_neighbors.NeighborProvider] = &lt;class 'sensai.nearest_neighbors.AllNeighborsProvider'&gt;, distanceBasedWeighting=False, distanceEpsilon=0.001, distanceMetricCache: sensai.nearest_neighbors.CachingKNearestNeighboursFinder.DistanceMetricCache = None, **kwargs</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jambit/sensAI/blob/master/src/sensai/nearest_neighbors.py#L274"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensai.nearest_neighbors.KNearestNeighboursRegressionModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="vector_model.html#sensai.vector_model.VectorRegressionModel" title="sensai.vector_model.VectorRegressionModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sensai.vector_model.VectorRegressionModel</span></code></a></p>
+<dl class="py method">
+<dt id="sensai.nearest_neighbors.KNearestNeighboursRegressionModel.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">numNeighbors: int, distanceMetric: sensai.distance_metric.DistanceMetric, neighborProviderFactory: Callable[[pandas.core.frame.DataFrame], sensai.nearest_neighbors.NeighborProvider] = &lt;class 'sensai.nearest_neighbors.AllNeighborsProvider'&gt;, distanceBasedWeighting=False, distanceEpsilon=0.001, distanceMetricCache: sensai.nearest_neighbors.CachingKNearestNeighboursFinder.DistanceMetricCache = None, **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.nearest_neighbors.KNearestNeighboursRegressionModel.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>numNeighbors</strong> – the number of nearest neighbors to consider</p></li>
+<li><p><strong>distanceMetric</strong> – the distance metric to use</p></li>
+<li><p><strong>neighborProviderFactory</strong> – a factory with which a neighbor provider can be constructed using data</p></li>
+<li><p><strong>distanceBasedWeighting</strong> – whether to weight neighbors according to their distance (inverse); if False, use democratic vote</p></li>
+<li><p><strong>distanceEpsilon</strong> – a distance that is added to all distances for distance-based weighting (in order to avoid 0 distances);</p></li>
+<li><p><strong>distanceMetricCache</strong> – a cache for distance metrics which shall be used to store speed up repeated computations
+of the neighbors of the same data point by keeping series of distances cached (particularly for composite distance metrics);
+see class CachingKNearestNeighboursFinder</p></li>
+<li><p><strong>kwargs</strong> – parameters to pass on to super-classes</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sensai.nearest_neighbors.FeatureGeneratorNeighbors">
+<em class="property">class </em><code class="sig-name descname">FeatureGeneratorNeighbors</code><span class="sig-paren">(</span><em class="sig-param">numNeighbors: int, neighborAttributes: List[str], distanceMetric: sensai.distance_metric.DistanceMetric, neighborProviderFactory: Callable[[pandas.core.frame.DataFrame], sensai.nearest_neighbors.NeighborProvider] = &lt;class 'sensai.nearest_neighbors.AllNeighborsProvider'&gt;, cache: sensai.util.cache.PersistentKeyValueCache = None, categoricalFeatureNames: Sequence[str] = (), normalisationRules: Sequence[sensai.data_transformation.DFTNormalisation.Rule] = ()</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jambit/sensAI/blob/master/src/sensai/nearest_neighbors.py#L334"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensai.nearest_neighbors.FeatureGeneratorNeighbors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="featuregen.html#sensai.featuregen.FeatureGeneratorFromNamedTuples" title="sensai.featuregen.FeatureGeneratorFromNamedTuples"><code class="xref py py-class docutils literal notranslate"><span class="pre">sensai.featuregen.FeatureGeneratorFromNamedTuples</span></code></a></p>
+<p>Generates features based on nearest neighbors. For each neighbor, a set of features is added to the output data frame.
+Each feature has the name “n{0-based neighbor index}_{feature name}”, where the feature names are configurable
+at construction. The feature name “distance”, which indicates the distance of the neighbor to the data point is
+always present.</p>
+<dl class="py method">
+<dt id="sensai.nearest_neighbors.FeatureGeneratorNeighbors.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">numNeighbors: int, neighborAttributes: List[str], distanceMetric: sensai.distance_metric.DistanceMetric, neighborProviderFactory: Callable[[pandas.core.frame.DataFrame], sensai.nearest_neighbors.NeighborProvider] = &lt;class 'sensai.nearest_neighbors.AllNeighborsProvider'&gt;, cache: sensai.util.cache.PersistentKeyValueCache = None, categoricalFeatureNames: Sequence[str] = (), normalisationRules: Sequence[sensai.data_transformation.DFTNormalisation.Rule] = ()</em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.nearest_neighbors.FeatureGeneratorNeighbors.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>numNeighbors</strong> – the number of neighbors for to generate features</p></li>
+<li><p><strong>neighborAttributes</strong> – the attributes of the neighbor’s named tuple to include as features (in addition to “distance”)</p></li>
+<li><p><strong>distanceMetric</strong> – the distance metric defining which neighbors are near</p></li>
+<li><p><strong>neighborProviderFactory</strong> – a factory for the creation of neighbor provider</p></li>
+<li><p><strong>cache</strong> – an optional key-value cache in which feature values are stored by data point identifier (as given by the DataFrame’s index)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="normalisation.html" class="btn btn-neutral float-right" title="normalisation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="naive_bayes.html" class="btn btn-neutral float-left" title="naive_bayes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright .
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

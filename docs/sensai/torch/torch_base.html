@@ -1,0 +1,464 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>torch_base &mdash; sensAI 0.0.5.dev0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="torch_data" href="torch_data.html" />
+    <link rel="prev" title="torch" href="../torch.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> sensAI
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Guides and Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Clustering%20Evaluation.html">Evaluating clustering algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Intro%20to%20Coordinate%20Clustering.html">The Coordinate Clustering Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Intro%20to%20sensAI.html">Lightning intro to sensAI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Tracking%20Experiments.html">Tracking sensAI experiments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting-started.html">Getting started</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../catboost.html">catboost</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../clustering.html">clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../columngen.html">columngen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_ingest.html">data_ingest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data_transformation.html">data_transformation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../distance_metric.html">distance_metric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ensemble.html">ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../evaluation.html">evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../featuregen.html">featuregen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hyperopt.html">hyperopt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lightgbm.html">lightgbm</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../local_search.html">local_search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../naive_bayes.html">naive_bayes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nearest_neighbors.html">nearest_neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../normalisation.html">normalisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../sklearn.html">sklearn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tensorflow.html">tensorflow</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../torch.html">torch</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">torch_base</a></li>
+<li class="toctree-l3"><a class="reference internal" href="torch_data.html">torch_data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="torch_models.html">torch_models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="torch_modules.html">torch_modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="torch_opt.html">torch_opt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="torchtext.html">torchtext</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tracking.html">tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../util.html">util</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../vector_model.html">vector_model</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">sensAI</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Modules</a> &raquo;</li>
+        
+          <li><a href="../torch.html">torch</a> &raquo;</li>
+        
+      <li>torch_base</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/sensai/torch/torch_base.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-sensai.torch.torch_base">
+<span id="torch-base"></span><h1>torch_base<a class="headerlink" href="#module-sensai.torch.torch_base" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="sensai.torch.torch_base.TorchModel">
+<em class="property">class </em><code class="sig-name descname">TorchModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cuda</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jambit/sensAI/blob/master/src/sensai/torch/torch_base.py#L21"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensai.torch.torch_base.TorchModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>sensAI abstraction for torch models, which supports one-line training, allows for convenient model application,
+has basic mechanisms for data scaling, and soundly handles persistence (via pickle).
+An instance wraps a torch.nn.Module, which is constructed on demand during training via the factory method
+createTorchModule.</p>
+<dl class="py method">
+<dt id="sensai.torch.torch_base.TorchModel.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cuda</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.torch.torch_base.TorchModel.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sensai.torch.torch_base.TorchModel.setTorchModule">
+<code class="sig-name descname">setTorchModule</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">module</span><span class="p">:</span> <span class="n">torch.nn.Module</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.torch.torch_base.TorchModel.setTorchModule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="sensai.torch.torch_base.TorchModel.getModuleBytes">
+<code class="sig-name descname">getModuleBytes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sensai.torch.torch_base.TorchModel.getModuleBytes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="sensai.torch.torch_base.TorchModel.setModuleBytes">
+<code class="sig-name descname">setModuleBytes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">modelBytes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.torch.torch_base.TorchModel.setModuleBytes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="sensai.torch.torch_base.TorchModel.getTorchModule">
+<code class="sig-name descname">getTorchModule</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sensai.torch.torch_base.TorchModel.getTorchModule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="sensai.torch.torch_base.TorchModel.createTorchModule">
+<em class="property">abstract </em><code class="sig-name descname">createTorchModule</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; torch.nn.Module<a class="headerlink" href="#sensai.torch.torch_base.TorchModel.createTorchModule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="sensai.torch.torch_base.TorchModel.apply">
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>torch.Tensor<span class="p">, </span>numpy.ndarray<span class="p">, </span><a class="reference internal" href="torch_data.html#sensai.torch.torch_data.TorchDataSet" title="sensai.torch.torch_data.TorchDataSet">sensai.torch.torch_data.TorchDataSet</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">asNumpy</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">createBatch</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">mcDropoutSamples</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">mcDropoutProbability</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">scaleOutput</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">scaleInput</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; Union<span class="p">[</span>torch.Tensor<span class="p">, </span>numpy.ndarray<span class="p">, </span>Tuple<span class="p">]</span><a class="headerlink" href="#sensai.torch.torch_base.TorchModel.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the model to the given input tensor and returns the result (normalized)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> – the input tensor (either a batch or, if createBatch=True, a single data point) or data set.
+If it is a data set, a single tensor will be extracted from it, so the data set must not be too large to be processed at once.</p></li>
+<li><p><strong>asNumpy</strong> – flag indicating whether to convert the result to a numpy.array (if False, return tensor)</p></li>
+<li><p><strong>createBatch</strong> – whether to add an additional tensor dimension for a batch containing just one data point</p></li>
+<li><p><strong>mcDropoutSamples</strong> – if not None, apply MC-Dropout-based inference with the respective number of samples; if None, apply regular inference</p></li>
+<li><p><strong>mcDropoutProbability</strong> – the probability with which to apply dropouts in MC-Dropout-based inference; if None, use model’s default</p></li>
+<li><p><strong>scaleOutput</strong> – whether to scale the output that is produced by the underlying model (using this instance’s output scaler)</p></li>
+<li><p><strong>scaleInput</strong> – whether to scale the input (using this instance’s input scaler) before applying the underlying model</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>an output tensor or, if MC-Dropout is applied, a pair (y, sd) where y the mean output tensor and sd is a tensor of the same dimension
+containing standard deviations</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sensai.torch.torch_base.TorchModel.applyScaled">
+<code class="sig-name descname">applyScaled</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">X</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>torch.Tensor<span class="p">, </span>numpy.ndarray<span class="p">, </span><a class="reference internal" href="torch_data.html#sensai.torch.torch_data.TorchDataSet" title="sensai.torch.torch_data.TorchDataSet">sensai.torch.torch_data.TorchDataSet</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span> &#x2192; Union<span class="p">[</span>torch.Tensor<span class="p">, </span>numpy.ndarray<span class="p">]</span><a class="headerlink" href="#sensai.torch.torch_base.TorchModel.applyScaled" title="Permalink to this definition">¶</a></dt>
+<dd><p>applies the model to the given input tensor and returns the scaled result (i.e. in the original scale)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> – the input tensor or data set</p></li>
+<li><p><strong>kwargs</strong> – parameters to pass on to apply</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a scaled output tensor or, if MC-Dropout is applied, a pair (y, sd) of scaled tensors, where
+y the mean output tensor and sd is a tensor of the same dimension containing standard deviations</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sensai.torch.torch_base.TorchModel.scaledOutput">
+<code class="sig-name descname">scaledOutput</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.torch.torch_base.TorchModel.scaledOutput" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="sensai.torch.torch_base.TorchModel.fit">
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n"><a class="reference internal" href="torch_data.html#sensai.torch.torch_data.TorchDataSetProvider" title="sensai.torch.torch_data.TorchDataSetProvider">sensai.torch.torch_data.TorchDataSetProvider</a></span></em>, <em class="sig-param"><span class="o">**</span><span class="n">nnOptimiserParams</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.torch.torch_base.TorchModel.fit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sensai.torch.torch_base.TorchModelFromModuleFactory">
+<em class="property">class </em><code class="sig-name descname">TorchModelFromModuleFactory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">moduleFactory</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">]</span><span class="p">, </span>torch.nn.Module<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">cuda</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jambit/sensAI/blob/master/src/sensai/torch/torch_base.py#L197"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensai.torch.torch_base.TorchModelFromModuleFactory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sensai.torch.torch_base.TorchModel" title="sensai.torch.torch_base.TorchModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sensai.torch.torch_base.TorchModel</span></code></a></p>
+<dl class="py method">
+<dt id="sensai.torch.torch_base.TorchModelFromModuleFactory.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">moduleFactory</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">]</span><span class="p">, </span>torch.nn.Module<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">cuda</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.torch.torch_base.TorchModelFromModuleFactory.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sensai.torch.torch_base.TorchModelFromModuleFactory.createTorchModule">
+<code class="sig-name descname">createTorchModule</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; torch.nn.Module<a class="headerlink" href="#sensai.torch.torch_base.TorchModelFromModuleFactory.createTorchModule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sensai.torch.torch_base.VectorTorchModel">
+<em class="property">class </em><code class="sig-name descname">VectorTorchModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cuda</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jambit/sensAI/blob/master/src/sensai/torch/torch_base.py#L206"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensai.torch.torch_base.VectorTorchModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sensai.torch.torch_base.TorchModel" title="sensai.torch.torch_base.TorchModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sensai.torch.torch_base.TorchModel</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Base class for TorchModels that can be used within VectorModels, where the input and output dimensions
+are determined by the data</p>
+<dl class="py method">
+<dt id="sensai.torch.torch_base.VectorTorchModel.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cuda</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.torch.torch_base.VectorTorchModel.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="sensai.torch.torch_base.VectorTorchModel.createTorchModule">
+<code class="sig-name descname">createTorchModule</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#sensai.torch.torch_base.VectorTorchModel.createTorchModule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="sensai.torch.torch_base.VectorTorchModel.createTorchModuleForDims">
+<em class="property">abstract </em><code class="sig-name descname">createTorchModuleForDims</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inputDim</span></em>, <em class="sig-param"><span class="n">outputDim</span></em><span class="sig-paren">)</span> &#x2192; torch.nn.Module<a class="headerlink" href="#sensai.torch.torch_base.VectorTorchModel.createTorchModuleForDims" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sensai.torch.torch_base.TorchVectorRegressionModel">
+<em class="property">class </em><code class="sig-name descname">TorchVectorRegressionModel</code><span class="sig-paren">(</span><em class="sig-param">modelClass: Callable[[...], sensai.torch.torch_base.TorchModel], modelArgs=(), modelKwArgs=None, normalisationMode=&lt;NormalisationMode.NONE: 'none'&gt;, nnOptimiserParams=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jambit/sensAI/blob/master/src/sensai/torch/torch_base.py#L229"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensai.torch.torch_base.TorchVectorRegressionModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../vector_model.html#sensai.vector_model.VectorRegressionModel" title="sensai.vector_model.VectorRegressionModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sensai.vector_model.VectorRegressionModel</span></code></a></p>
+<p>Base class for the implementation of VectorRegressionModels based on TorchModels.
+An instance of this class will have an instance of TorchModel as the underlying model.</p>
+<dl class="py method">
+<dt id="sensai.torch.torch_base.TorchVectorRegressionModel.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">modelClass: Callable[[...], sensai.torch.torch_base.TorchModel], modelArgs=(), modelKwArgs=None, normalisationMode=&lt;NormalisationMode.NONE: 'none'&gt;, nnOptimiserParams=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.torch.torch_base.TorchVectorRegressionModel.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modelClass</strong> – the constructor with which to create the wrapped torch vector model</p></li>
+<li><p><strong>modelArgs</strong> – the constructor argument list to pass to modelClass</p></li>
+<li><p><strong>modelKwArgs</strong> – the dictionary of constructor keyword arguments to pass to modelClass</p></li>
+<li><p><strong>normalisationMode</strong> – the normalisation mode to apply to input data frames</p></li>
+<li><p><strong>nnOptimiserParams</strong> – the parameters to apply in NNOptimiser during training</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="sensai.torch.torch_base.TorchVectorClassificationModel">
+<em class="property">class </em><code class="sig-name descname">TorchVectorClassificationModel</code><span class="sig-paren">(</span><em class="sig-param">modelClass: Callable[[...], sensai.torch.torch_base.VectorTorchModel], modelArgs=(), modelKwArgs=None, normalisationMode=&lt;NormalisationMode.NONE: 'none'&gt;, nnOptimiserParams=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/jambit/sensAI/blob/master/src/sensai/torch/torch_base.py#L287"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sensai.torch.torch_base.TorchVectorClassificationModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../vector_model.html#sensai.vector_model.VectorClassificationModel" title="sensai.vector_model.VectorClassificationModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">sensai.vector_model.VectorClassificationModel</span></code></a></p>
+<p>Base class for the implementation of VectorClassificationModels based on TorchModels.
+An instance of this class will have an instance of TorchModel as the underlying model.</p>
+<dl class="py method">
+<dt id="sensai.torch.torch_base.TorchVectorClassificationModel.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">modelClass: Callable[[...], sensai.torch.torch_base.VectorTorchModel], modelArgs=(), modelKwArgs=None, normalisationMode=&lt;NormalisationMode.NONE: 'none'&gt;, nnOptimiserParams=None</em><span class="sig-paren">)</span><a class="headerlink" href="#sensai.torch.torch_base.TorchVectorClassificationModel.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modelClass</strong> – the constructor with which to create the wrapped torch vector model</p></li>
+<li><p><strong>modelArgs</strong> – the constructor argument list to pass to modelClass</p></li>
+<li><p><strong>modelKwArgs</strong> – the dictionary of constructor keyword arguments to pass to modelClass</p></li>
+<li><p><strong>normalisationMode</strong> – the normalisation mode to apply to input data frames</p></li>
+<li><p><strong>nnOptimiserParams</strong> – the parameters to apply in NNOptimiser during training</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="torch_data.html" class="btn btn-neutral float-right" title="torch_data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../torch.html" class="btn btn-neutral float-left" title="torch" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright .
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -20,8 +20,8 @@ from typing import Optional, Tuple
 import numpy as np
 import pandas as pd
 
-from sensai import VectorRegressionModel, VectorClassificationModel, VectorModel
-from sensai.util.pandas import extractArray
+from .util.pandas import extractArray
+from .vector_model import VectorRegressionModel, VectorClassificationModel, VectorModel
 
 log = logging.getLogger(__name__)
 # we set the default level to debug because it is often interesting for the user to receive

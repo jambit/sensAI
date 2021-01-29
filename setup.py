@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
 tf_requirements = ['tensorflow==1.15.0']
-torch_requirements = ['torch==1.4.0', 'torchtext==0.5.0']
+torch_requirements = ['torch==1.4.0', 'torchtext==0.5.0', 'pytorch_lightning~=1.1']
 lightgbm_requirements = ['lightgbm==2.3.0']
 setup(
     name='sensai',

@@ -7,10 +7,10 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import os
-import sys
 import ast
 import logging
+import os
+import sys
 
 import pkg_resources
 
@@ -103,6 +103,7 @@ def findLineFromObjectName(sourceFile, objectName):
 
 autodoc_mock_imports = [
     "torch",
+    "pytorch_lightning",
     "torchtext",
     "tensorflow",
     "lightgbm",

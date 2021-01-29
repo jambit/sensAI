@@ -457,7 +457,7 @@ class VectorClassificationModel(VectorModel, ABC):
                             f"got probabilities outside the range [0, 1]: checked row {i}/{maxRowsToCheck} contains {list(valueSeries)}")
 
             s = valueSeries.sum()
-            if not np.isclose(s, 1, rtol=1e-2, ltol=1e-2):
+            if not np.isclose(s, 1, atol=1e-2):
                 log.warning(
                     f"Probabilities data frame may not be correctly normalised: checked row {i}/{maxRowsToCheck} contains {list(valueSeries)}")
 

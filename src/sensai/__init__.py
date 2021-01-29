@@ -12,6 +12,8 @@ from .data_transformation import DataFrameTransformer, RuleBasedDataFrameTransfo
 from .ensemble import AveragingVectorRegressionModel
 from .evaluation.eval_stats import eval_stats_classification, eval_stats_regression
 from .normalisation import NormalisationMode
+from .tensor_model import TensorToTensorRegressionModel, TensorToScalarRegressionModel, \
+    TensorToTensorClassificationModel, TensorToScalarClassificationModel
 from .vector_model import VectorModel, VectorRegressionModel, VectorClassificationModel
 
 __version__ = "0.0.5.dev0"

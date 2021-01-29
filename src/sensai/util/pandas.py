@@ -1,6 +1,10 @@
+import logging
 from copy import copy
 
+import numpy as np
 import pandas as pd
+
+log = logging.getLogger(__name__)
 
 
 class DataFrameColumnChangeTracker:
@@ -57,3 +61,41 @@ class DataFrameColumnChangeTracker:
         if self.finalColumns is None:
             raise Exception(f"No change was tracked yet. "
                             f"Did you forget to call trackChange on the resulting data frame?")
+
+
+def extractArray(df: pd.DataFrame):
+    """
+    Extracts array from data frame. It is expected that each row corresponds to a data point and
+    each column corresponds to a "channel". Moreover, all entries are expected to be arrays of the same shape
+    (or scalars or sequences of the same length). We will refer to that shape as tensorShape.
+
+    The output will be of shape (N_rows, N_columns, tensorShape). Thus, N_rows can be interpreted as dataset length
+    (or batch size, if a single batch is passed) and N_columns can be interpreted as number of channels.
+    Empty dimensions will be stripped, thus if the data frame has only one column, the array will have shape
+    (N_rows, tensorShape).
+    E.g. an image with three channels could equally be passed as data frame of the type
+
+
+    | ----|-----R-----|-----G-----|-----B------
+    | =========================================
+    | 0---|--channel--|--channel--|--channel
+    | 1---| ...
+
+     or as df of the type
+
+    | ----|----image----|
+    | ====================
+    | 0---|--RGBArray--|
+    | 1---| ...
+
+    In both cases the returned array will have shape (N_images, 3, width, height)
+
+    :param df: data frame where each entry is an array of shape tensorShape
+    :return: array of shape N_rows, N_columns, tensorShape with stripped empty dimensions
+    """
+    log.debug(f"Stacking tensors of shape {np.array(df.iloc[0, 0]).shape}")
+    try:
+        return np.stack(df.apply(np.stack, axis=1)).squeeze()
+    except ValueError:
+        raise ValueError(f"No array can be extracted from frame of length {len(df)} with columns {list(df.columns)}. "
+                         f"Make sure that all entries have the same shape")

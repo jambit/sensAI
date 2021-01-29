@@ -33,7 +33,7 @@ class InvalidShapeError(Exception): pass
 
 def _getDatapointShape(df: pd.DataFrame):
     firstRowDf = df.iloc[:1]
-    return _extractArray(firstRowDf)[0].shape
+    return extractArray(firstRowDf)[0].shape
 
 
 def _checkDfShape(df: pd.DataFrame, desiredShape: tuple):
@@ -42,7 +42,7 @@ def _checkDfShape(df: pd.DataFrame, desiredShape: tuple):
         raise InvalidShapeError(f"Wrong input shape for data point. Expected {desiredShape} but got {datapointShape}")
 
 
-def _extractArray(df: pd.DataFrame):
+def extractArray(df: pd.DataFrame):
     """
     Extracts array from data frame. It is expected that each row corresponds to a data point and
     each column corresponds to a "channel". Moreover, all entries are expected to be arrays of the same shape
@@ -74,7 +74,7 @@ def _extractArray(df: pd.DataFrame):
     """
     log.debug(f"Stacking tensors of shape {np.array(df.iloc[0, 0]).shape}")
     try:
-        return np.stack(df.apply(np.stack, axis=1))
+        return np.stack(df.apply(np.stack, axis=1)).squeeze()
     except ValueError:
         raise ValueError(f"No array can be extracted from frame of length {len(df)} with columns {list(df.columns)}. "
                          f"Make sure that all entries have the same shape")
@@ -94,14 +94,55 @@ class TensorModel(ABC):
     def _fitToArray(self, X: np.ndarray, Y: np.ndarray):
         pass
 
+    @abstractmethod
+    def _predictArray(self, X: np.ndarray) -> np.ndarray:
+        """
+        The result should be of shape `(N_DataPoints, *predictedTensorShape)` if a single column is predicted
+        or of shape `(N_DataPoints, N_Columns, *predictedTensorShape)` if multiple columns are predicted
+        (e.g. for multiple regression targets). Note that in both cases, the number of predicted columns
+        should coincide with corresponding number in the ground truth data frame the model was fitted on
+
+        :param X: a tensor of shape `(N_DataPoints, *inputTensorShape)`
+        """
+        pass
+
+    def _predictDFThroughArray(self, X: pd.DataFrame, outputColumns: list) -> pd.DataFrame:
+        """
+        To be used within _predict in implementations of this class. Performs predictions by
+        transforming X into an array, computing the predicted array from it and turning the result into a
+        predictions data frame.
+
+        :param X: input data frame (of same type as for _fitTensorModel)
+        :param outputColumns: columns of the outputDF, typically the result of calling `getPredictedVariableNames()` in
+            an implementation
+        :return:
+        """
+        Y = self._predictArray(extractArray(X))
+        if not len(Y) == len(X):
+            raise InvalidShapeError(f"Number of data points (lengths) of input data frame and predictions must agree. "
+                                    f"Expected {len(X)} but got {len(Y)}")
+
+        result = pd.DataFrame(index=X.index)
+        nColumns = len(outputColumns)
+        if nColumns == 1:
+            result[outputColumns[0]] = list(Y)
+        else:
+
+            if not nColumns == Y.shape[1]:
+                raise InvalidShapeError(f"Wrong shape of predictions array for a data frame with {nColumns} columns ({outputColumns}). "
+                                        f"Expected shape ({len(X)}, {nColumns}, ...) but got: {Y.shape}")
+            for i, col in enumerate(outputColumns):
+                result[col] = list(Y[:, i])
+        return result
+
     def _fitTensorModel(self, X: pd.DataFrame, Y: pd.DataFrame):
         """
         To be used within _fit in implementations of this class
         """
         log.debug(f"Stacking input tensors from columns {X.columns} and from all rows to a single array. "
                   f"Note that all tensors need to have the same shape")
-        X = _extractArray(X)
-        Y = _extractArray(Y)
+        X = extractArray(X)
+        Y = extractArray(Y)
         self._modelInputShape = X[0].shape
         self._modelOutputShape = Y[0].shape
         log.debug(f"Fitting on {len(X)} datapoints of shape {self._modelInputShape}. "
@@ -132,6 +173,9 @@ class TensorToScalarRegressionModel(VectorRegressionModel, TensorModel, ABC):
     def _fit(self, X: pd.DataFrame, Y: pd.DataFrame):
         self._fitTensorModel(X, Y)
 
+    def _predict(self, x: pd.DataFrame) -> pd.DataFrame:
+        return self._predictDFThroughArray(x, self.getPredictedVariableNames())
+
     def predict(self, x: pd.DataFrame) -> pd.DataFrame:
         if self.checkInputShape:
             _checkDfShape(x, self.getModelInputShape())
@@ -152,13 +196,35 @@ class TensorToScalarClassificationModel(VectorClassificationModel, TensorModel, 
         super().__init__(checkInputColumns=checkInputColumns)
         self.checkInputShape = checkInputShape
 
-    def _fit(self, X: pd.DataFrame, Y: pd.DataFrame):
-        self._fitTensorModel(X, Y)
+    def _predictClassProbabilities(self, X: pd.DataFrame) -> pd.DataFrame:
+        return self._predictDFThroughArray(X, self.getClassLabels())
+
+    def _fitClassifier(self, X: pd.DataFrame, y: pd.DataFrame):
+        self._fitTensorModel(X, y)
 
     def predict(self, x: pd.DataFrame) -> pd.DataFrame:
         if self.checkInputShape:
             _checkDfShape(x, self.getModelInputShape())
         return super().predict(x)
+
+    # just renaming the abstract method to implement
+    def _predictArray(self, X: np.ndarray) -> np.ndarray:
+        return self._predictProbabilitiesArray(X)
+
+    @abstractmethod
+    def _predictProbabilitiesArray(self, X: np.ndarray) -> np.ndarray:
+        """
+        If you are implementing a probabilistic classifier, this method should return a tensor with probabilities
+        of shape `(N_DataPoints, N_Labels)`. It is assumed that labels are lexicographically sorted and the order
+        of predictions in the output array should respect this.
+
+        The default implementation of _predict will then use the output of this method and convert it to predicted labels (via argmax).
+
+        In case you want to predict labels only or have a more efficient implementation of predicting labels than
+        using argmax, your will have to override _predict in your implementation. In the former case of a
+        non-probabilistic classifier, the implementation of this method should raise an exception, like the one below.
+        """
+        raise NotImplementedError(f"Model {self.__class__.__name__} does not support prediction of probabilities")
 
 
 # Note: for tensor to tensor models the output shape is not trivial. There will be dedicated evaluators
@@ -184,6 +250,9 @@ class TensorToTensorRegressionModel(VectorRegressionModel, TensorModel, ABC):
 
     def _fit(self, X: pd.DataFrame, Y: pd.DataFrame):
         self._fitTensorModel(X, Y)
+
+    def _predict(self, x: pd.DataFrame) -> pd.DataFrame:
+        return self._predictDFThroughArray(x, self.getPredictedVariableNames())
 
     def predict(self, x: pd.DataFrame) -> pd.DataFrame:
         if not self.isFitted():
@@ -242,7 +311,7 @@ class TensorToTensorClassificationModel(VectorModel, TensorModel, ABC):
                              f"column with tensors containing one-hot-encoded labels")
 
         # checking if Y is a binary array of one hot encoded labels
-        dfYToCheck = _extractArray(Y.iloc[:5])
+        dfYToCheck = extractArray(Y.iloc[:5])
         if not np.array_equal(dfYToCheck, dfYToCheck.astype(bool)):
             raise Exception(f"Ground truth data points have to be binary arrays of one-hot-encoded labels "
                             f"of shape (*predictionShape, numLabels). Did you forget to one-hot-encode your labels "
@@ -280,8 +349,8 @@ class TensorToTensorClassificationModel(VectorModel, TensorModel, ABC):
     def predictClassProbabilities(self, x: pd.DataFrame) -> pd.DataFrame:
         """
         :param x: the input data
-        :return: a data frame where the list of columns is the list of class labels and the values are probabilities.
-            Returns None if the classifier cannot predict probabilities.
+        :return: a data frame with a single column containing arrays of shape `(*tensorShape, numLabels)`.
+             Raises an exception if the classifier cannot predict probabilities.
         """
         x = self._computeModelInputs(x)
         if self.checkInputShape:
@@ -292,13 +361,13 @@ class TensorToTensorClassificationModel(VectorModel, TensorModel, ABC):
 
     def _checkPrediction(self, predictionDf: pd.DataFrame, maxRowsToCheck=5):
         """
-        Checks whether the column name is correctly, whether the shapes match set and whether the entries
+        Checks whether the column name is correctly, whether the shapes match the ground truth and whether the entries
         correspond to probabilities
         """
         if self.checkOutputShape:
             _checkDfShape(predictionDf, self.getModelOutputShape())
 
-        arrayToCheck = _extractArray(predictionDf.iloc[:maxRowsToCheck])
+        arrayToCheck = extractArray(predictionDf.iloc[:maxRowsToCheck])
 
         if not np.all(0 <= arrayToCheck) or not np.all(arrayToCheck <= 1):
             log.warning(f"Probability arrays may not be correctly normalised, "
@@ -310,13 +379,21 @@ class TensorToTensorClassificationModel(VectorModel, TensorModel, ABC):
                 f"Probability array data frame may not be correctly normalised, "
                 f"received probabilities do not sum to 1")
 
-    @abstractmethod
     def _predictClassProbabilities(self, X: pd.DataFrame) -> pd.DataFrame:
+        return self._predictDFThroughArray(X, self.getPredictedVariableNames())
+
+    # just renaming the abstract method to implement
+    def _predictArray(self, X: np.ndarray) -> np.ndarray:
+        return self._predictProbabilitiesArray(X)
+
+    @abstractmethod
+    def _predictProbabilitiesArray(self, X: np.ndarray) -> np.ndarray:
         """
-        If you are implementing a probabilistic classifier, this method has to return a data frame
-        containing an array with probabilities, of shape `(*tensorShape, numLabels)`.
-        The default implementation of _predict will then use the output of this method and convert it to an array
-        of predicted labels of shape `tensorShape` (via argmax).
+        If you are implementing a probabilistic classifier, this method should return a tensor with probabilities
+        of shape `(N_DataPoints, N_Labels)`. It is assumed that labels are lexicographically sorted and the order
+        of predictions in the output array should respect this.
+
+        The default implementation of _predict will then use the output of this method and convert it to predicted labels (via argmax).
 
         In case you want to predict labels only or have a more efficient implementation of predicting labels than
         using argmax, your will have to override _predict in your implementation. In the former case of a

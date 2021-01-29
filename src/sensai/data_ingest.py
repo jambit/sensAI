@@ -1,13 +1,17 @@
 from abc import ABC, abstractmethod
-from typing import Tuple, Sequence
+from typing import Tuple, Sequence, TypeVar
 
 import numpy as np
 import pandas as pd
 import scipy.stats
 
 
-class InputOutputData:
-    def __init__(self, inputs: pd.DataFrame, outputs: pd.DataFrame):
+class InputOutputData(ABC):
+    def __init__(self, inputs, outputs):
+        """
+        :param inputs: expected to have shape and __len__
+        :param outputs: expected to have shape and __len__
+        """
         if len(inputs) != len(outputs):
             raise ValueError("Lengths do not match")
         self.inputs = inputs
@@ -16,6 +20,39 @@ class InputOutputData:
     def __len__(self):
         return len(self.inputs)
 
+    @abstractmethod
+    def filterIndices(self, indices: Sequence[int]) -> __qualname__:
+        pass
+
+
+class InputOutputArrays(InputOutputData):
+    def __init__(self, inputs: np.ndarray, outputs: np.ndarray):
+        super().__init__(inputs, outputs)
+
+    def filterIndices(self, indices: Sequence[int]) -> __qualname__:
+        inputs = self.inputs[indices]
+        outputs = self.outputs[indices]
+        return InputOutputArrays(inputs, outputs)
+
+    def toTorchDataLoader(self, batchSize=64, shuffle=True):
+        try:
+            import torch
+            from torch.utils.data import DataLoader, TensorDataset
+        except ImportError:
+            raise ImportError(f"Could not import torch, did you install it?")
+        dataSet = TensorDataset(torch.tensor(self.inputs), torch.tensor(self.outputs))
+        return DataLoader(dataSet, batch_size=batchSize, shuffle=shuffle)
+
+
+class InputOutputDataFrames(InputOutputData):
+    def __init__(self, inputs: pd.DataFrame, outputs: pd.DataFrame):
+        super().__init__(inputs, outputs)
+
+    def filterIndices(self, indices: Sequence[int]) -> __qualname__:
+        inputs = self.inputs.iloc[indices]
+        outputs = self.outputs.iloc[indices]
+        return InputOutputDataFrames(inputs, outputs)
+
     @property
     def inputDim(self):
         return self.inputs.shape[1]
@@ -23,11 +60,6 @@ class InputOutputData:
     @property
     def outputDim(self):
         return self.outputs.shape[1]
-
-    def filterIndices(self, indices: Sequence[int]) -> 'InputOutputData':
-        inputs = self.inputs.iloc[indices]
-        outputs = self.outputs.iloc[indices]
-        return InputOutputData(inputs, outputs)
 
     def computeInputOutputCorrelation(self):
         correlations = {}
@@ -43,19 +75,22 @@ class InputOutputData:
 
 class DataSplitter(ABC):
     @abstractmethod
-    def split(self, data: InputOutputData) -> Tuple[InputOutputData, InputOutputData]:
+    def split(self, data: InputOutputDataFrames) -> Tuple[InputOutputDataFrames, InputOutputDataFrames]:
         pass
 
 
+IOData = TypeVar("IOData", bound=InputOutputData)
+
+
 class DataSplitterFractional(DataSplitter):
-    def __init__(self, fractionalSizeOfFirstSet, shuffle=True, randomSeed: int = 42):
+    def __init__(self, fractionalSizeOfFirstSet: float, shuffle=True, randomSeed=42):
         if not 0 <= fractionalSizeOfFirstSet <= 1:
             raise Exception(f"invalid fraction: {fractionalSizeOfFirstSet}")
         self.fractionalSizeOfFirstSet = fractionalSizeOfFirstSet
         self.shuffle = shuffle
         self.randomSeed = randomSeed
 
-    def split(self, data: InputOutputData) -> Tuple[InputOutputData, InputOutputData]:
+    def split(self, data: IOData) -> Tuple[IOData, IOData]:
         numDataPoints = len(data)
         splitIndex = int(numDataPoints * self.fractionalSizeOfFirstSet)
         rand = np.random.RandomState(self.randomSeed)

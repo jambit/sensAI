@@ -1,11 +1,12 @@
 import logging
-import sys
 import os
+import sys
+
 import pandas as pd
 import pytest
 import sklearn.datasets
 
-from sensai import InputOutputData, VectorClassificationModel
+from sensai import InputOutputDataFrames, VectorClassificationModel
 from sensai.evaluation import VectorClassificationModelEvaluator
 
 sys.path.append(os.path.abspath("."))
@@ -29,12 +30,12 @@ class IrisDataSet:
             inputs = pd.DataFrame(d["data"], columns=d["feature_names"])
             targetNames = d["target_names"]
             outputs = pd.DataFrame({"class": [targetNames[x] for x in d["target"]]})
-            cls._iod = InputOutputData(inputs, outputs)
+            cls._iod = InputOutputDataFrames(inputs, outputs)
         return cls._iod
 
 
 class ClassificationTestCase:
-    def __init__(self, data: InputOutputData):
+    def __init__(self, data: InputOutputDataFrames):
         self.data = data
 
     def testMinAccuracy(self, model: VectorClassificationModel, minAccuracy: float, fit=True):

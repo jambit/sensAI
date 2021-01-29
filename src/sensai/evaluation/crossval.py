@@ -12,7 +12,7 @@ from .eval_stats.eval_stats_regression import RegressionEvalStats, RegressionEva
 from .evaluator import RegressionModelEvaluationData, ClassificationModelEvaluationData, \
     PredictorModelEvaluationData, VectorClassificationModelEvaluator, VectorRegressionModelEvaluator, \
     MetricsDictProvider
-from ..data_ingest import InputOutputData
+from ..data_ingest import InputOutputDataFrames
 from ..util.typing import PandasNamedTuple
 from ..vector_model import VectorClassificationModel, VectorRegressionModel, VectorModel, PredictorModel
 
@@ -65,7 +65,7 @@ TCrossValData = TypeVar("TCrossValData", bound=PredictorModelCrossValidationData
 
 
 class VectorModelCrossValidator(MetricsDictProvider, Generic[TCrossValData], ABC):
-    def __init__(self, data: InputOutputData, folds: int = 5, randomSeed=42, returnTrainedModels=False, evaluatorParams: dict = None):
+    def __init__(self, data: InputOutputDataFrames, folds: int = 5, randomSeed=42, returnTrainedModels=False, evaluatorParams: dict = None):
         """
         :param data: the data set
         :param folds: the number of folds
@@ -88,7 +88,7 @@ class VectorModelCrossValidator(MetricsDictProvider, Generic[TCrossValData], ABC
             self.modelEvaluators.append(self._createModelEvaluator(data.filterIndices(trainIndices), data.filterIndices(testIndices)))
 
     @abstractmethod
-    def _createModelEvaluator(self, trainingData: InputOutputData, testData: InputOutputData):
+    def _createModelEvaluator(self, trainingData: InputOutputDataFrames, testData: InputOutputDataFrames):
         pass
 
     @abstractmethod
@@ -123,7 +123,7 @@ class VectorRegressionModelCrossValidationData(PredictorModelCrossValidationData
 
 class VectorRegressionModelCrossValidator(VectorModelCrossValidator[VectorRegressionModelCrossValidationData]):
     # TODO: after switching to python3.8 we can move both methods to the base class by accessing the generic type at runtime
-    def _createModelEvaluator(self, trainingData: InputOutputData, testData: InputOutputData) -> VectorRegressionModelEvaluator:
+    def _createModelEvaluator(self, trainingData: InputOutputDataFrames, testData: InputOutputDataFrames) -> VectorRegressionModelEvaluator:
         return VectorRegressionModelEvaluator(trainingData, testData=testData, **self.evaluatorParams)
 
     def _createResultData(self, trainedModels, evalDataList, testIndicesList, predictedVarNames) -> VectorRegressionModelCrossValidationData:
@@ -136,7 +136,7 @@ class VectorClassificationModelCrossValidationData(PredictorModelCrossValidation
 
 
 class VectorClassificationModelCrossValidator(VectorModelCrossValidator[VectorClassificationModelCrossValidationData]):
-    def _createModelEvaluator(self, trainingData: InputOutputData, testData: InputOutputData):
+    def _createModelEvaluator(self, trainingData: InputOutputDataFrames, testData: InputOutputDataFrames):
         return VectorClassificationModelEvaluator(trainingData, testData=testData, **self.evaluatorParams)
 
     def _createResultData(self, trainedModels, evalDataList, testIndicesList, predictedVarNames) -> VectorClassificationModelCrossValidationData:

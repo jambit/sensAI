@@ -23,7 +23,7 @@ from .eval_stats.eval_stats_classification import ClassificationEvalStats
 from .eval_stats.eval_stats_regression import RegressionEvalStats
 from .evaluator import PredictorModelEvaluator, PredictorModelEvaluationData, VectorRegressionModelEvaluator, \
     RegressionModelEvaluationData, VectorClassificationModelEvaluator, ClassificationModelEvaluationData
-from ..data_ingest import InputOutputData
+from ..data_ingest import InputOutputDataFrames
 from ..util.io import ResultWriter
 from ..vector_model import VectorClassificationModel, VectorRegressionModel, VectorModel
 
@@ -48,30 +48,30 @@ def _isRegression(model: Optional[VectorModel], isRegression: Optional[bool]) ->
     return isRegression
 
 
-def createVectorModelEvaluator(data: InputOutputData, model: VectorModel = None,
-        isRegression: bool = None, **kwargs) \
+def createVectorModelEvaluator(data: InputOutputDataFrames, model: VectorModel = None,
+                               isRegression: bool = None, **kwargs) \
             -> Union[VectorRegressionModelEvaluator, VectorClassificationModelEvaluator]:
     cons = VectorRegressionModelEvaluator if _isRegression(model, isRegression) else VectorClassificationModelEvaluator
     return cons(data, **kwargs)
 
 
-def createVectorModelCrossValidator(data: InputOutputData, model: VectorModel = None,
-        isRegression: bool = None, folds=5, **kwargs) \
+def createVectorModelCrossValidator(data: InputOutputDataFrames, model: VectorModel = None,
+                                    isRegression: bool = None, folds=5, **kwargs) \
             -> Union[VectorClassificationModelCrossValidator, VectorRegressionModelCrossValidator]:
     cons = VectorRegressionModelCrossValidator if _isRegression(model, isRegression) else VectorClassificationModelCrossValidator
     return cons(data, folds=folds, **kwargs)
 
 
-def createEvaluationUtil(data: InputOutputData, model: VectorModel = None,
-        isRegression: bool = None, evaluatorParams: Optional[Dict[str, Any]] = None,
-        crossValidatorParams: Optional[Dict[str, Any]] = None) \
+def createEvaluationUtil(data: InputOutputDataFrames, model: VectorModel = None,
+                         isRegression: bool = None, evaluatorParams: Optional[Dict[str, Any]] = None,
+                         crossValidatorParams: Optional[Dict[str, Any]] = None) \
             -> Union["ClassificationEvaluationUtil", "RegressionEvaluationUtil"]:
     cons = RegressionEvaluationUtil if _isRegression(model, isRegression) else ClassificationEvaluationUtil
     return cons(data, evaluatorParams=evaluatorParams, crossValidatorParams=crossValidatorParams)
 
 
-def evalModelViaEvaluator(model: TModel, inputOutputData: InputOutputData, testFraction=0.2,
-        plotTargetDistribution=False, computeProbabilities=True, normalizePlots=True, randomSeed=60) -> TEvalData:
+def evalModelViaEvaluator(model: TModel, inputOutputData: InputOutputDataFrames, testFraction=0.2,
+                          plotTargetDistribution=False, computeProbabilities=True, normalizePlots=True, randomSeed=60) -> TEvalData:
     """
     Evaluates the given model via a simple evaluation mechanism that uses a single split
 
@@ -115,8 +115,8 @@ class EvaluationUtil(ABC, Generic[TModel, TEvaluator, TEvalData, TCrossValidator
     """
     Utility class for the evaluation of models based on a dataset
     """
-    def __init__(self, inputOutputData: InputOutputData, evaluatorParams: Optional[Dict[str, Any]] = None,
-            crossValidatorParams: Optional[Dict[str, Any]] = None):
+    def __init__(self, inputOutputData: InputOutputDataFrames, evaluatorParams: Optional[Dict[str, Any]] = None,
+                 crossValidatorParams: Optional[Dict[str, Any]] = None):
         """
         :param inputOutputData: the data set to use for evaluation
         :param evaluatorParams: parameters with which to instantiate evaluators
@@ -299,7 +299,7 @@ class ClassificationEvaluationUtil(EvaluationUtil[VectorClassificationModel, Vec
 
 
 class MultiDataEvaluationUtil:
-    def __init__(self, inputOutputDataDict: Dict[str, InputOutputData], keyName: str = "dataset"):
+    def __init__(self, inputOutputDataDict: Dict[str, InputOutputDataFrames], keyName: str = "dataset"):
         """
         :param inputOutputDataDict: a dictionary mapping from names to the data sets with which to evaluate models
         :param keyName: a name for the key value used in inputOutputDataDict

@@ -8,7 +8,7 @@ import pandas as pd
 from .eval_stats.eval_stats_base import EvalStats, EvalStatsCollection
 from .eval_stats.eval_stats_classification import ClassificationEvalStats, ClassificationMetric
 from .eval_stats.eval_stats_regression import RegressionEvalStats, RegressionEvalStatsCollection, RegressionMetric
-from ..data_ingest import DataSplitter, DataSplitterFractional, InputOutputData
+from ..data_ingest import DataSplitter, DataSplitterFractional, InputOutputDataFrames
 from ..tracking import TrackingMixin
 from ..util.typing import PandasNamedTuple
 from ..vector_model import VectorClassificationModel, VectorModel, PredictorModel, FittableModel
@@ -87,8 +87,8 @@ TEvalData = TypeVar("TEvalData", bound=PredictorModelEvaluationData)
 
 
 class PredictorModelEvaluator(MetricsDictProvider, Generic[TEvalData], ABC):
-    def __init__(self, data: InputOutputData, testData: InputOutputData = None, dataSplitter: DataSplitter = None,
-            testFraction: float = None, randomSeed=42, shuffle=True):
+    def __init__(self, data: InputOutputDataFrames, testData: InputOutputDataFrames = None, dataSplitter: DataSplitter = None,
+                 testFraction: float = None, randomSeed=42, shuffle=True):
         """
         Constructs an evaluator with test and training data.
         Exactly one of the parameters {testData, dataSplitter, testFraction} must be given
@@ -127,7 +127,7 @@ class PredictorModelEvaluator(MetricsDictProvider, Generic[TEvalData], ABC):
         return self._evalModel(model, data)
 
     @abstractmethod
-    def _evalModel(self, model: PredictorModel, data: InputOutputData) -> TEvalData:
+    def _evalModel(self, model: PredictorModel, data: InputOutputDataFrames) -> TEvalData:
         pass
 
     def _computeMetrics(self, model: PredictorModel, onTrainingData=False) -> Dict[str, float]:
@@ -144,12 +144,12 @@ class PredictorModelEvaluator(MetricsDictProvider, Generic[TEvalData], ABC):
 
 
 class VectorRegressionModelEvaluator(PredictorModelEvaluator[RegressionModelEvaluationData]):
-    def __init__(self, data: InputOutputData, testData: InputOutputData = None, dataSplitter=None, testFraction=None, randomSeed=42, shuffle=True,
-            additionalMetrics: Sequence[RegressionMetric] = None):
+    def __init__(self, data: InputOutputDataFrames, testData: InputOutputDataFrames = None, dataSplitter=None, testFraction=None, randomSeed=42, shuffle=True,
+                 additionalMetrics: Sequence[RegressionMetric] = None):
         super().__init__(data=data, dataSplitter=dataSplitter, testFraction=testFraction, testData=testData, randomSeed=randomSeed, shuffle=shuffle)
         self.additionalMetrics = additionalMetrics
 
-    def _evalModel(self, model: PredictorModel, data: InputOutputData) -> RegressionModelEvaluationData:
+    def _evalModel(self, model: PredictorModel, data: InputOutputDataFrames) -> RegressionModelEvaluationData:
         if not model.isRegressionModel():
             raise ValueError(f"Expected a regression model, got {model}")
         evalStatsByVarName = {}
@@ -169,7 +169,7 @@ class VectorRegressionModelEvaluator(PredictorModelEvaluator[RegressionModelEval
         """
         return self._computeOutputs(model, self.testData)
 
-    def _computeOutputs(self, model: PredictorModel, inputOutputData: InputOutputData):
+    def _computeOutputs(self, model: PredictorModel, inputOutputData: InputOutputDataFrames):
         """
         Applies the given model to the given data
 
@@ -187,13 +187,13 @@ class ClassificationModelEvaluationData(PredictorModelEvaluationData[Classificat
 
 
 class VectorClassificationModelEvaluator(PredictorModelEvaluator[ClassificationModelEvaluationData]):
-    def __init__(self, data: InputOutputData, testData: InputOutputData = None, dataSplitter=None, testFraction=None,
-            randomSeed=42, computeProbabilities=False, shuffle=True, additionalMetrics: Sequence[ClassificationMetric] = None):
+    def __init__(self, data: InputOutputDataFrames, testData: InputOutputDataFrames = None, dataSplitter=None, testFraction=None,
+                 randomSeed=42, computeProbabilities=False, shuffle=True, additionalMetrics: Sequence[ClassificationMetric] = None):
         super().__init__(data=data, testData=testData, dataSplitter=dataSplitter, testFraction=testFraction, randomSeed=randomSeed, shuffle=shuffle)
         self.computeProbabilities = computeProbabilities
         self.additionalMetrics = additionalMetrics
 
-    def _evalModel(self, model: VectorClassificationModel, data: InputOutputData) -> ClassificationModelEvaluationData:
+    def _evalModel(self, model: VectorClassificationModel, data: InputOutputDataFrames) -> ClassificationModelEvaluationData:
         if model.isRegressionModel():
             raise ValueError(f"Expected a classification model, got {model}")
         predictions, predictions_proba, groundTruth = self._computeOutputs(model, data)
@@ -211,7 +211,7 @@ class VectorClassificationModelEvaluator(PredictorModelEvaluator[ClassificationM
         """
         return self._computeOutputs(model, self.testData)
 
-    def _computeOutputs(self, model, inputOutputData: InputOutputData) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    def _computeOutputs(self, model, inputOutputData: InputOutputDataFrames) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
         """
         Applies the given model to the given data
 
@@ -230,7 +230,7 @@ class VectorClassificationModelEvaluator(PredictorModelEvaluator[ClassificationM
 
 
 class RuleBasedClassificationModelEvaluator(VectorClassificationModelEvaluator):
-    def __init__(self, data: InputOutputData):
+    def __init__(self, data: InputOutputDataFrames):
         super().__init__(data, testData=data)
 
     def evalModel(self, model: PredictorModel, onTrainingData=False) -> ClassificationModelEvaluationData:
@@ -252,7 +252,7 @@ class RuleBasedClassificationModelEvaluator(VectorClassificationModelEvaluator):
 
 # TODO: once we update to python 3.8 and have access to generic types at runtime, we can reduce this code duplication
 class RuleBasedRegressionModelEvaluator(VectorRegressionModelEvaluator):
-    def __init__(self, data: InputOutputData):
+    def __init__(self, data: InputOutputDataFrames):
         super().__init__(data, testData=data)
 
     def evalModel(self, model: PredictorModel, onTrainingData=False) -> RegressionModelEvaluationData:

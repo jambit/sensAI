@@ -220,9 +220,8 @@ class TensorToTensorRegressionModel(VectorRegressionModel, TensorModel, ABC):
 
     def predict(self, x: pd.DataFrame) -> pd.DataFrame:
         if not self.isFitted():
-            # TODO: raise an Exception instead?
-            log.warning(f"Calling predict with unfitted model. "
-                        f"This might lead to errors down the line, especially if input/output checks are enabled")
+            raise Exception(f"Calling predict with unfitted model. "
+                            f"This might lead to errors down the line, especially if input/output checks are enabled")
         if self.checkInputShape:
             _checkDfShape(x, self.getModelInputShape())
         y = super().predict(x)
@@ -381,9 +380,8 @@ class TensorToTensorClassificationModel(VectorModel, TensorModel, ABC):
         0, 1, ..., numLabels - 1. They correspond to the predicted labels
         """
         if not self.isFitted():
-            # TODO: raise an Exception instead?
-            log.warning(f"Calling predict with unfitted model. "
-                        f"This might lead to errors down the line, especially if input/output checks are enabled")
+            raise Exception(f"Calling predict with unfitted model. "
+                            f"This might lead to errors down the line, especially if input/output checks are enabled")
         if self.checkInputShape:
             _checkDfShape(x, self.getModelInputShape())
         y = super().predict(x)
